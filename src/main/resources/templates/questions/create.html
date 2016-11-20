@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+
+    <form th:action="@{/questions/create}" th:object="${question}" method="POST" enctype="multipart/form-data">
+        <div>
+            <label for="title">Question Title</label>
+            <input type="text" name="title" id="title" placeholder="Title"></input>
+        </div>
+        <div>
+            <label for="description">Description</label>
+            <textarea cols="50" rows="20" id="description" name="description" placeholder="Description"></textarea>
+        </div>
+        <div>
+            <label for="image">Choose an image</label>
+            <input type="file" id="image" name="image"></input>
+        </div>
+        <div>
+            <button type="submit">Create</button>
+        </div>
+
+</form>
+
+</div>
+
+</body>
+</html>

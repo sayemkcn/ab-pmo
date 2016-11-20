@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>All Questions</title>
+</head>
+<body>
+
+<div>
+    <span th:if="${param.message != null}" th:text="${param.message[0]}"></span>
+</div>
+
+<div>
+    <table>
+        <thead>
+        <tr>
+            <td>Title</td>
+            <td>Description</td>
+            <td>Image</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="question : ${questionList}">
+            <td>
+                <span th:text="${question.getTitle()}"></span>
+            </td>
+            <td>
+                <span th:text="${question.getDescription()}"></span>
+            </td>
+            <td>
+                <img width="100px" height="100px" th:src="@{/questions/image/}+${question.getId()}"></img>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
