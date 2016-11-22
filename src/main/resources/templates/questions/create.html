@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3">
                 <h3>Create Question:</h3>
-                <form class="form" th:action="@{/questions/create}" th:object="${question}" method="POST"
+                <form class="form" th:action="@{/questions/create}" th:object="${question}" method="post"
                       enctype="multipart/form-data">
                     <div class="form-group">
                         <label class="label label-success" for="questionId">Question Id:</label>
