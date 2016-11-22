@@ -1,6 +1,7 @@
-package com.aimslabs.domains.pojo;
+package com.aimslabs.domains;
 
 import com.aimslabs.domains.Child;
+import com.aimslabs.domains.pojo.Address;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,14 +10,18 @@ import java.util.List;
  * Created by sayemkcn on 11/11/16.
  */
 @Entity
-public class AutismCenter {
+public class AutismCenter extends BaseEntity {
     private String name;
     private String email;
     private String password;
     private String role;
     private String phoneNumber;
+
     @Embedded
     private Address address;
+
+    @OneToOne
+    private User user;
 
     public String getName() {
         return name;
@@ -66,6 +71,14 @@ public class AutismCenter {
         this.address = address;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "AutismCenter{" +
@@ -75,6 +88,7 @@ public class AutismCenter {
                 ", role='" + role + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", address=" + address +
+                ", user=" + user +
                 '}';
     }
 }

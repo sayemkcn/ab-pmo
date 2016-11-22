@@ -1,7 +1,6 @@
 package com.aimslabs.domains;
 
-import javax.persistence.Entity;
-import javax.persistence.Lob;
+import javax.persistence.*;
 import java.util.Arrays;
 
 /**
@@ -11,7 +10,8 @@ import java.util.Arrays;
 public class Question extends BaseEntity {
     private String name;
     private int questionId;
-    @Lob
+    @Column(length = 10000000)
+    @Basic(fetch = FetchType.LAZY, optional = true)
     private byte[] file;
     private boolean result;
     private String positiveText;

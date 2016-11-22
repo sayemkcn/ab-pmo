@@ -42,7 +42,7 @@ public class QuestionController {
         if (bindingResult.hasErrors())
             System.out.println(bindingResult.toString());
         if (imageValidator.isImageValid(multipartFile)) {
-            question.setImage(multipartFile.getBytes());
+            question.setFile(multipartFile.getBytes());
         }
         this.questionService.save(question);
         return "redirect:/questions?message=Successful!";
@@ -53,6 +53,6 @@ public class QuestionController {
     @ResponseBody
     public byte[] getImage(@PathVariable("id") Long id) {
         Question question = this.questionService.getOne(id);
-        return question.getImage();
+        return question.getFile();
     }
 }

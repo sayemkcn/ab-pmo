@@ -12,11 +12,15 @@ public class Child extends BaseEntity {
     private String name;
     private float age;
     private Date birthDate;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Question> questionList;
     private boolean appResult;
     private String doctorNote;
     private boolean doctorResult;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Question> questionList;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Parent parent;
 
 
     public String getName() {
@@ -75,16 +79,25 @@ public class Child extends BaseEntity {
         this.doctorResult = doctorResult;
     }
 
+    public Parent getParent() {
+        return parent;
+    }
+
+    public void setParent(Parent parent) {
+        this.parent = parent;
+    }
+
     @Override
     public String toString() {
         return "Child{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
                 ", birthDate=" + birthDate +
-                ", questionList=" + questionList +
                 ", appResult=" + appResult +
                 ", doctorNote='" + doctorNote + '\'' +
                 ", doctorResult=" + doctorResult +
+                ", questionList=" + questionList +
+                ", parent=" + parent +
                 '}';
     }
 }

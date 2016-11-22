@@ -1,7 +1,6 @@
 package com.aimslabs.domains;
 
 import com.aimslabs.domains.pojo.Address;
-import com.aimslabs.domains.pojo.AutismCenter;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,19 +8,13 @@ import java.util.List;
 /**
  * Created by sayemkcn on 11/9/16.
  */
-@Entity
+@Entity(name = "a_user")
 public class User extends BaseEntity {
     private String name;
     private String email;
     private String password;
     private String role;
     private String phoneNumber;
-    @Embedded
-    private Address address;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Child> childList;
-    @OneToOne
-    private AutismCenter autismCenter;
 
     public String getName() {
         return name;
@@ -55,12 +48,12 @@ public class User extends BaseEntity {
         this.role = role;
     }
 
-    public List<Child> getChildList() {
-        return childList;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setChildList(List<Child> childList) {
-        this.childList = childList;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     @Override
@@ -70,7 +63,7 @@ public class User extends BaseEntity {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
-                ", childList=" + childList +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
 }

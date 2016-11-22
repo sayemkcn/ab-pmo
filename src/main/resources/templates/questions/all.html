@@ -3,37 +3,63 @@
 <head>
     <meta charset="UTF-8"></meta>
     <title>All Questions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="container-fluid">
+    <div th:if="${param.message != null}" class="row alert alert-warning">
+        <div class="col-sm-offset-2">
+            <span th:text="${param.message[0]}"></span>
+        </div>
+    </div>
 
-<div>
-    <span th:if="${param.message != null}" th:text="${param.message[0]}"></span>
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Image</td>
+                    <td>Question Name</td>
+                    <td>Positive Text</td>
+                    <td>Negative Text</td>
+                    <td>Edit</td>
+                    <td>Delete</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="question : ${questionList}">
+                    <td>
+                        <span th:text="${question.getQuestionId()}"></span>
+                    </td>
+                    <td>
+                        <img width="50px" height="50px" th:src="@{/questions/image/}+${question.getId()}"></img>
+                    </td>
+                    <td>
+                        <span th:text="${question.getName()}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${question.getPositiveText()}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${question.getNegativeText()}"></span>
+                    </td>
+                    <td>
+                        <a class="btn btn-warning" th:href="@{/questions/edit/}+${question.getId()}">Edit</a>
+                    </td>
+                    <td>
+                        <form th:action="@{/questions/delete/}+${question.getId()}">
+                            <button class="btn btn-danger" type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
-
-<div>
-    <table>
-        <thead>
-        <tr>
-            <td>Title</td>
-            <td>Description</td>
-            <td>Image</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="question : ${questionList}">
-            <td>
-                <span th:text="${question.getTitle()}"></span>
-            </td>
-            <td>
-                <span th:text="${question.getDescription()}"></span>
-            </td>
-            <td>
-                <img width="100px" height="100px" th:src="@{/questions/image/}+${question.getId()}"></img>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
 </body>
 </html>
