@@ -48,10 +48,10 @@
                         <span th:text="${question.getNegativeText()}"></span>
                     </td>
                     <td>
-                        <a class="btn btn-warning" th:href="@{/questions/edit/}+${question.getId()}">Edit</a>
+                        <a class="btn btn-warning" th:href="@{/questions/update/}+${question.getId()}">Update</a>
                     </td>
                     <td>
-                        <form th:action="@{/questions/delete/}+${question.getId()}">
+                        <form th:action="@{/questions/delete/}+${question.getId()}" method="post">
                             <button class="btn btn-danger" type="submit">Delete</button>
                         </form>
                     </td>

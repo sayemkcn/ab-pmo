@@ -30,11 +30,11 @@ public class QuestionService {
 
     @Transactional(readOnly = false)
     public Question save(Question question) {
-        return this.questionRepo.save(question);
+        return this.questionRepo.saveAndFlush(question);
     }
 
     @Transactional(readOnly = false)
-    public void delete(Question question) {
-        this.questionRepo.delete(question);
+    public void delete(Long id) {
+        this.questionRepo.delete(id);
     }
 }
