@@ -16,15 +16,18 @@
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3">
                 <h3>Create Question:</h3>
-                <form class="form" th:action="@{/questions/create}" th:object="${question}" method="post"
+                <form class="form" th:action="@{/questions/update/}+${question?.getId()}" th:object="${question}"
+                      method="post"
                       enctype="multipart/form-data">
                     <div class="form-group">
                         <label class="label label-success" for="questionId">Question Id:</label>
-                        <input class="form-control" type="number" name="questionId" id="questionId"></input>
+                        <input class="form-control" type="number" name="questionId" id="questionId"
+                               th:value="${question?.getQuestionId()}"></input>
                     </div>
                     <div class="form-group">
                         <label class="label label-success" for="name">Question Title</label>
-                        <input class="form-control" type="text" name="name" id="name" placeholder="Title"></input>
+                        <input class="form-control" type="text" name="name" id="name" placeholder="Title"
+                               th:value="${question?.getName()}"></input>
                     </div>
                     <div class="form-group">
                         <label class="label label-success" for="file">Choose an image</label>
@@ -32,26 +35,31 @@
                     </div>
                     <div class="form-group">
                         <label class="label label-success" for="positiveText">Positive Text</label>
-                        <input class="form-control" type="text" id="positiveText" name="positiveText"></input>
+                        <input class="form-control" type="text" id="positiveText" name="positiveText"
+                               th:value="${question.getPositiveText()}"></input>
                     </div>
                     <div class="form-group">
                         <label class="label label-success" for="negativeText">Negative Text</label>
-                        <input class="form-control" type="text" name="negativeText" id="negativeText"></input>
+                        <input class="form-control" type="text" name="negativeText" id="negativeText"
+                               th:value="${question.getNegativeText()}"></input>
                     </div>
                     <div class="form-group">
                         <label class="label label-success" for="reversedValueForButtons">Which button means probability
                             of Autism?</label>
                         <div id="reversedValueForButtons">
-                            <input class="form-control" type="radio" name="reversedValueForButtons" value="false">Positive Button</input>
-                            <input class="form-control" type="radio" name="reversedValueForButtons" value="true">Negative Button</input>
+                            <input class="form-control" type="radio" name="reversedValueForButtons" value="false"
+                                   th:checked="${!question?.isReversedValueForButtons()}">Positive Button</input>
+                            <input class="form-control" type="radio" name="reversedValueForButtons" value="true"
+                                   th:checked="${question?.isReversedValueForButtons()}">Negative Button</input>
                         </div>
                     </div>
                     <div class="form-group">
                         <lebel class="label label-success" for="critical">Critical Question?</lebel>
-                        <input type="checkbox" class="form-control" name="critical" id="critical"></input>
+                        <input type="checkbox" class="form-control" name="critical" id="critical"
+                               th:checked="${question?.isCritical()}"></input>
                     </div>
                     <div>
-                        <button class="btn btn-success" type="submit">Create</button>
+                        <button class="btn btn-warning" type="submit">Submit</button>
                     </div>
                 </form>
             </div>

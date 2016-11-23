@@ -31,6 +31,7 @@ public class QuestionController {
         return "questions/all";
     }
 
+    // ----- CREATE   -----//
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createPage() {
         return "questions/create";
@@ -38,7 +39,7 @@ public class QuestionController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createQuestion(@ModelAttribute Question question, BindingResult bindingResult,
-                                 @RequestParam("image") MultipartFile multipartFile) throws IOException {
+                                 @RequestParam("file") MultipartFile multipartFile) throws IOException {
         if (bindingResult.hasErrors())
             System.out.println(bindingResult.toString());
         if (imageValidator.isImageValid(multipartFile)) {
@@ -48,7 +49,47 @@ public class QuestionController {
         return "redirect:/questions?message=Successful!";
     }
 
+    // -------- UPDATE -------//
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+    private String updateQuestionPage(@PathVariable("id") Long id, Model model) {
+        Question question = this.questionService.getOne(id);
+        model.addAttribute("question", question);
+        return "questions/update";
+    }
 
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    private String updateQuestion(@ModelAttribute Question question, BindingResult bindingResult,
+                                  @RequestParam("file") MultipartFile multipartFile,
+                                  @PathVariable("id") Long id) throws IOException {
+        if (bindingResult.hasErrors())
+            System.out.println(bindingResult.toString());
+
+        Question existingQuestion = this.questionService.getOne(id);
+        if (!multipartFile.isEmpty()) {
+            if (imageValidator.isImageValid(multipartFile))
+                existingQuestion.setFile(multipartFile.getBytes());
+            else
+                return "redirect:/questions/update/" + id + "?message=file is not valid!";
+        }
+        // The reason for copying new entity to existing entity is, when updating entity created date will be saved null because @PrePersist will not be executed this time.
+        existingQuestion.setName(question.getName());
+        existingQuestion.setQuestionId(question.getQuestionId());
+        existingQuestion.setPositiveText(question.getPositiveText());
+        existingQuestion.setNegativeText(question.getNegativeText());
+        existingQuestion.setCritical(question.isCritical());
+        existingQuestion.setReversedValueForButtons(question.isReversedValueForButtons());
+        this.questionService.save(existingQuestion);
+        return "redirect:/questions?message=Successfully updated question " + existingQuestion.getQuestionId();
+    }
+
+    // ------ DELETE -----//
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+    private String deleteQuestion(@PathVariable("id") Long id) {
+        this.questionService.delete(id);
+        return "redirect:/questions?message=Successfully deleted question.";
+    }
+
+    // ------ IMAGE -----//
     @RequestMapping(value = "/image/{id}", method = RequestMethod.GET)
     @ResponseBody
     public byte[] getImage(@PathVariable("id") Long id) {

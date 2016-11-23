@@ -3,6 +3,7 @@ package com.aimslabs.domains;
 import com.aimslabs.domains.pojo.Address;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -13,7 +14,8 @@ public class User extends BaseEntity {
     private String name;
     private String email;
     private String password;
-    private String role;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Collection<String> roles;
     private String phoneNumber;
 
     public String getName() {
@@ -40,14 +42,6 @@ public class User extends BaseEntity {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -56,13 +50,22 @@ public class User extends BaseEntity {
         this.phoneNumber = phoneNumber;
     }
 
+    public Collection<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<String> roles) {
+        this.roles = roles;
+    }
+
+
     @Override
     public String toString() {
         return "User{" +
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
+                ", roles=" + roles +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
