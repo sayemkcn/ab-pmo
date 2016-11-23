@@ -24,4 +24,9 @@ public class UserServiceImpl implements UserService {
         return userRepo.saveAndFlush(user);
     }
 
+    @Override
+    public User getUserByEmail(String email) {
+        return this.userRepo.findByEmail(email);
+    }
+
 }

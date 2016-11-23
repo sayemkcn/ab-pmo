@@ -18,24 +18,6 @@ import java.util.Set;
 @Controller
 public class UserController {
 
-    @Autowired
-    private UserService userService;
 
-    // -- REGISTER -- //
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String registerPage() {
-        return "user/register";
-    }
-
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String registerUser(@ModelAttribute User user, BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            System.out.println(bindingResult.toString());
-        Set<String> roles = new HashSet<>();
-        roles.add("PARENTS");
-        user.setRoles(roles);
-        this.userService.saveUser(user);
-        return "redirect:/login?message=Successfully registered!";
-    }
 
 }

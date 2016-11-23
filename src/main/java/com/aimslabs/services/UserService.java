@@ -12,7 +12,10 @@ import org.springframework.stereotype.Service;
 public interface UserService {
 
     User getUser(Long id);
+
     User saveUser(User user);
+
+    User getUserByEmail(String email);
 
 
 }
