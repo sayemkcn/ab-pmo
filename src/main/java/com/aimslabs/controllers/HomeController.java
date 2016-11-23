@@ -25,9 +25,13 @@ public class HomeController {
         return "index";
     }
 
-
     @Autowired
     private UserService userService;
+
+    @RequestMapping(value = "/dashboard",method = RequestMethod.GET)
+    public String dashboard(){
+        return "parents/dashboard";
+    }
 
     // -- REGISTER -- //
     @RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -68,7 +72,7 @@ public class HomeController {
             return "login";
         }
         session.setAttribute("user", user);
-        return "redirect:/";
+        return "redirect:/dashboard";
     }
 
     // -- LOGOUT -- /

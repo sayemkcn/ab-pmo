@@ -33,6 +33,10 @@ public abstract class BaseEntity {
         this.created = new Date();
     }
 
+    public void setCreated(Date date) {
+        this.created = new Date();
+    }
+
     public Date getLastUpdated() {
         return lastUpdated;
     }

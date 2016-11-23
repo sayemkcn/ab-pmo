@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Update Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div>
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <h3>Create Profile:</h3>
+                <form class="form" th:action="@{/profile/update/}+${session?.user?.getId()}" th:object="${parent}" method="post"
+                      enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="label label-success" for="name">Your name</label>
+                        <input class="form-control" type="text" name="name" th:value="${parent?.getName()}" id="name" placeholder="You Name"></input>
+                    </div>
+                    <div class="form-group">
+                        <label class="label label-success" for="phoneNumber">Phone Number</label>
+                        <input class="form-control" type="text" id="phoneNumber" th:value="${parent?.getPhoneNumber()}" name="phoneNumber"></input>
+                    </div>
+                    <div class="form-group">
+                        <h4>Address:</h4>
+                        <div class="form-group">
+                            <label class="label label-success" for="street">Street</label>
+                            <input class="form-control" type="text" id="street" th:value="${parent?.getAddress()?.getStreet()}" name="address.street"></input>
+                        </div>
+                        <div class="form-group">
+                            <label class="label label-success" for="thana">Thana</label>
+                            <input class="form-control" type="text" name="address.thana" th:value="${parent?.getAddress()?.getThana()}" id="thana"></input>
+                        </div>
+                        <div class="form-group">
+                            <label class="label label-success" for="district">District</label>
+                            <input class="form-control" type="text" name="address.district" th:value="${parent?.getAddress()?.getDistrict()}" id="district"></input>
+                        </div>
+                        <div class="form-group">
+                            <label class="label label-success" for="postCode">Post Code</label>
+                            <input class="form-control" type="number" name="address.postCode" th:value="${parent?.getAddress()?.getPostCode()}" id="postCode"></input>
+                        </div>
+                        <div class="form-group">
+                            <label class="label label-success" for="division">Division</label>
+                            <input class="form-control" type="text" name="address.division" th:value="${parent?.getAddress()?.getDivision()}" id="division"></input>
+                        </div>
+                    </div>
+                    <button class="btn btn-success" type="submit">Create Profile</button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

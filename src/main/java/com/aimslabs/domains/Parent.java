@@ -16,6 +16,9 @@ public class Parent extends BaseEntity {
     @Embedded
     private Address address;
 
+    @OneToOne
+    private User user;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "parent")
     private List<Child> childList;
 
@@ -51,12 +54,21 @@ public class Parent extends BaseEntity {
         this.childList = childList;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "Parent{" +
                 "name='" + name + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", address=" + address +
+                ", user=" + user +
                 ", childList=" + childList +
                 '}';
     }
