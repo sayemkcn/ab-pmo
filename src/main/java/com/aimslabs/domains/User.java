@@ -1,8 +1,11 @@
 package com.aimslabs.domains;
 
 import com.aimslabs.domains.pojo.Address;
+import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.List;
 
@@ -12,7 +15,11 @@ import java.util.List;
 @Entity(name = "a_user")
 public class User extends BaseEntity {
     private String name;
+    @NotNull
+    @Email
+    @Column(unique = true, nullable = false)
     private String email;
+    @Size(min = 6)
     private String password;
     @ElementCollection(fetch = FetchType.EAGER)
     private Collection<String> roles;

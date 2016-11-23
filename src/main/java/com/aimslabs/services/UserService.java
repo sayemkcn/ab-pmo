@@ -13,6 +13,7 @@ public interface UserService {
 
     User getUser(Long id);
     User saveUser(User user);
+    User getUserByEmail(String email);
 
 
 }
