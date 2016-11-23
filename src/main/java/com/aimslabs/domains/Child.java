@@ -1,10 +1,7 @@
 package com.aimslabs.domains;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,7 +17,7 @@ public class Child extends BaseEntity {
     private boolean doctorResult;
 
     @ElementCollection
-    private Map<Question, Bool> questionsMap;
+    private Map<Question, Boolean> questionsMap;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Parent parent;
@@ -50,11 +47,11 @@ public class Child extends BaseEntity {
         this.birthDate = birthDate;
     }
 
-    public Map<Question, Bool> getQuestionsMap() {
+    public Map<Question, Boolean> getQuestionsMap() {
         return questionsMap;
     }
 
-    public void setQuestionsMap(Map<Question, Bool> questionsMap) {
+    public void setQuestionsMap(Map<Question, Boolean> questionsMap) {
         this.questionsMap = questionsMap;
     }
 
