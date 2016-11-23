@@ -77,7 +77,7 @@ public class QuestionController {
         existingQuestion.setPositiveText(question.getPositiveText());
         existingQuestion.setNegativeText(question.getNegativeText());
         existingQuestion.setCritical(question.isCritical());
-        existingQuestion.setReversedValueForButtons(question.isReversedValueForButtons());
+        existingQuestion.setAutismDitectedForPositiveText(question.isAutismDitectedForPositiveText());
         this.questionService.save(existingQuestion);
         return "redirect:/questions?message=Successfully updated question " + existingQuestion.getQuestionId();
     }

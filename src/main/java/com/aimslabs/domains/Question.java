@@ -15,7 +15,7 @@ public class Question extends BaseEntity {
     private byte[] file;
     private String positiveText;
     private String negativeText;
-    private boolean reversedValueForButtons;
+    private boolean autismDitectedForPositiveText;
     private boolean critical;
 
     public String getName() {
@@ -58,13 +58,12 @@ public class Question extends BaseEntity {
         this.negativeText = negativeText;
     }
 
-
-    public boolean isReversedValueForButtons() {
-        return reversedValueForButtons;
+    public boolean isAutismDitectedForPositiveText() {
+        return autismDitectedForPositiveText;
     }
 
-    public void setReversedValueForButtons(boolean reversedValueForButtons) {
-        this.reversedValueForButtons = reversedValueForButtons;
+    public void setAutismDitectedForPositiveText(boolean autismDitectedForPositiveText) {
+        this.autismDitectedForPositiveText = autismDitectedForPositiveText;
     }
 
     public boolean isCritical() {
