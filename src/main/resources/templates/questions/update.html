@@ -43,6 +43,21 @@
                         <input class="form-control" type="text" name="negativeText" id="negativeText"
                                th:value="${question.getNegativeText()}"></input>
                     </div>
+                    <div class="form-group">
+                        <label class="label label-success" for="reversedValueForButtons">Which button means probability
+                            of Autism?</label>
+                        <div id="reversedValueForButtons">
+                            <input class="form-control" type="radio" name="reversedValueForButtons" value="false"
+                                   th:checked="${!question?.isReversedValueForButtons()}">Positive Button</input>
+                            <input class="form-control" type="radio" name="reversedValueForButtons" value="true"
+                                   th:checked="${question?.isReversedValueForButtons()}">Negative Button</input>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <lebel class="label label-success" for="critical">Critical Question?</lebel>
+                        <input type="checkbox" class="form-control" name="critical" id="critical"
+                               th:checked="${question?.isCritical()}"></input>
+                    </div>
                     <div>
                         <button class="btn btn-warning" type="submit">Submit</button>
                     </div>

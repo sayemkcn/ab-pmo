@@ -13,9 +13,10 @@ public class Question extends BaseEntity {
     @Column(length = 10000000)
     @Basic(fetch = FetchType.LAZY, optional = true)
     private byte[] file;
-    private boolean result;
     private String positiveText;
     private String negativeText;
+    private boolean reversedValueForButtons;
+    private boolean critical;
 
     public String getName() {
         return name;
@@ -41,14 +42,6 @@ public class Question extends BaseEntity {
         this.file = file;
     }
 
-    public boolean isResult() {
-        return result;
-    }
-
-    public void setResult(boolean result) {
-        this.result = result;
-    }
-
     public String getPositiveText() {
         return positiveText;
     }
@@ -65,15 +58,20 @@ public class Question extends BaseEntity {
         this.negativeText = negativeText;
     }
 
-    @Override
-    public String toString() {
-        return "Question{" +
-                "name='" + name + '\'' +
-                ", questionId=" + questionId +
-                ", file=" + Arrays.toString(file) +
-                ", result=" + result +
-                ", positiveText='" + positiveText + '\'' +
-                ", negativeText='" + negativeText + '\'' +
-                '}';
+
+    public boolean isReversedValueForButtons() {
+        return reversedValueForButtons;
+    }
+
+    public void setReversedValueForButtons(boolean reversedValueForButtons) {
+        this.reversedValueForButtons = reversedValueForButtons;
+    }
+
+    public boolean isCritical() {
+        return critical;
+    }
+
+    public void setCritical(boolean critical) {
+        this.critical = critical;
     }
 }

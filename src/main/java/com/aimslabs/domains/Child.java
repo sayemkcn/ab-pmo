@@ -1,8 +1,11 @@
 package com.aimslabs.domains;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by sayemkcn on 11/9/16.
@@ -16,8 +19,8 @@ public class Child extends BaseEntity {
     private String doctorNote;
     private boolean doctorResult;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Question> questionList;
+    @ElementCollection
+    private Map<Question, Bool> questionsMap;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Parent parent;
@@ -47,12 +50,12 @@ public class Child extends BaseEntity {
         this.birthDate = birthDate;
     }
 
-    public List<Question> getQuestionList() {
-        return questionList;
+    public Map<Question, Bool> getQuestionsMap() {
+        return questionsMap;
     }
 
-    public void setQuestionList(List<Question> questionList) {
-        this.questionList = questionList;
+    public void setQuestionsMap(Map<Question, Bool> questionsMap) {
+        this.questionsMap = questionsMap;
     }
 
     public boolean isAppResult() {
@@ -96,7 +99,7 @@ public class Child extends BaseEntity {
                 ", appResult=" + appResult +
                 ", doctorNote='" + doctorNote + '\'' +
                 ", doctorResult=" + doctorResult +
-                ", questionList=" + questionList +
+                ", questionsMap=" + questionsMap +
                 ", parent=" + parent +
                 '}';
     }
