@@ -2,6 +2,7 @@ package com.aimslabs.domains;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -17,7 +18,7 @@ public class Child extends BaseEntity {
     private boolean doctorResult;
 
     @ElementCollection
-    private Set<QuestionResponse> responseSet;
+    private List<QuestionResponse> responseSet;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Parent parent;
@@ -47,11 +48,11 @@ public class Child extends BaseEntity {
         this.birthDate = birthDate;
     }
 
-    public Set<QuestionResponse> getResponseSet() {
+    public List<QuestionResponse> getResponseSet() {
         return responseSet;
     }
 
-    public void setResponseSet(Set<QuestionResponse> responseSet) {
+    public void setResponseSet(List<QuestionResponse> responseSet) {
         this.responseSet = responseSet;
     }
 

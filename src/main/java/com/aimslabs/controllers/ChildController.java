@@ -64,13 +64,13 @@ public class ChildController {
         qResponse.setUserResponse(userResponse);
 
         // pull responselist from session and update it with new list
-        Set<QuestionResponse> responseSet = (Set<QuestionResponse>) session.getAttribute("responseList");
-        if (responseSet == null || responseSet.isEmpty())
-            responseSet = new HashSet<>();
+        List<QuestionResponse> responseList = (List<QuestionResponse>) session.getAttribute("responseList");
+        if (responseList == null || responseList.isEmpty())
+            responseList = new ArrayList<>();
         // check if repsonse already exists, if yes then remove previous response
-        responseSet = this.questionResponseService.removeResponseIfExists(responseSet, qResponse);
-        responseSet.add(qResponse);
-        session.setAttribute("responseList", responseSet);
+        responseList = this.questionResponseService.removeResponseIfExists(responseList, qResponse);
+        responseList.add(qResponse);
+        session.setAttribute("responseList", responseList);
 
         System.out.println(session.getAttribute("responseList"));
         return "redirect:/child/screening/" + (++questionId);
