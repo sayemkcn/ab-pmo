@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -25,14 +26,10 @@ public class QuestionResponseService {
         return this.questionResponseRepo.getOne(id);
     }
 
-
     public List<QuestionResponse> removeResponseIfExists(List<QuestionResponse> responseList, QuestionResponse qResponse) {
-        List<QuestionResponse> newResponseList = new ArrayList<>();
-        for (QuestionResponse response : responseList) {
-            if (response.getQuestionId() != qResponse.getQuestionId())
-                newResponseList.add(response);
-        }
-        return newResponseList;
+        return responseList.stream()
+                .filter(e -> e.getQuestionId() != qResponse.getQuestionId())
+                .collect(Collectors.toList());
     }
 
 }
