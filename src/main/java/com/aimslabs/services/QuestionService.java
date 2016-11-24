@@ -28,6 +28,11 @@ public class QuestionService {
         return this.questionRepo.getOne(id);
     }
 
+    @Transactional(readOnly = true)
+    public Question findByQuestionId(int questionId) {
+        return this.questionRepo.findByQuestionId(questionId);
+    }
+
     @Transactional(readOnly = false)
     public Question save(Question question) {
         return this.questionRepo.saveAndFlush(question);

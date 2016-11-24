@@ -87,4 +87,17 @@ public class Child extends BaseEntity {
         this.parent = parent;
     }
 
+    @Override
+    public String toString() {
+        return "Child{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", birthDate=" + birthDate +
+                ", appResult=" + appResult +
+                ", doctorNote='" + doctorNote + '\'' +
+                ", doctorResult=" + doctorResult +
+                ", responseList=" + responseList +
+                ", parent=" + parent +
+                '}';
+    }
 }

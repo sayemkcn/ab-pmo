@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Create Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div>
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <h3>Enter your child informations:</h3>
+                <form class="form" th:action="@{/child/screening/start}" method="post">
+                    <div class="form-group">
+                        <label class="label label-success" for="name">Child name</label>
+                        <input class="form-control" type="text" name="name" id="name" placeholder="You Name"></input>
+                    </div>
+                    <div class="form-group">
+                        <label class="label label-success" for="age">Age</label>
+                        <input class="form-control" type="text" id="age" name="age" placeholder="age"></input>
+                    </div>
+                    <div class="form-group">
+                        <label class="label label-success" for="birthDate">Birth Date</label>
+                        <input class="form-control" type="date" id="birthDate" name="birthDate"></input>
+                    </div>
+                    <button class="btn btn-success" type="submit">Start Screening</button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
