@@ -12,9 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by sayemkcn on 11/24/16.
@@ -39,24 +37,24 @@ public class ChildController {
                                  HttpSession session) {
         if (bindingResult.hasErrors())
             System.out.println(bindingResult.toString());
-        session.setAttribute("child",child);
+        session.setAttribute("child", child);
 
         System.out.println(session.getAttribute("child"));
         return "redirect:/child/screening/1";
     }
 
-    @RequestMapping(value = "/screening/{questionId}",method = RequestMethod.GET)
+    @RequestMapping(value = "/screening/{questionId}", method = RequestMethod.GET)
     public String screeningQuestionariesPage(@PathVariable("questionId") Integer questionId,
-                                             Model model){
+                                             Model model) {
         Question question = this.questionService.findByQuestionId(questionId);
-        model.addAttribute("question",question);
+        model.addAttribute("question", question);
         return "parents/screening/questionaries";
     }
 
-    @RequestMapping(value = "/screening/{questionId}",method = RequestMethod.POST)
+    @RequestMapping(value = "/screening/{questionId}", method = RequestMethod.POST)
     public String screeningQuestionaries(@PathVariable("questionId") Integer questionId,
                                          @RequestParam("userResponse") Boolean userResponse,
-                                         HttpSession session){
+                                         HttpSession session) {
         QuestionResponse qResponse = new QuestionResponse();
         // check if this response already exists
 //        QuestionResponse existionResponse = this.questionResponseService.getOne(questionId.longValue());
@@ -66,13 +64,15 @@ public class ChildController {
         qResponse.setUserResponse(userResponse);
 
         // pull responselist from session and update it with new list
-        List<QuestionResponse> responseList = (List<QuestionResponse>) session.getAttribute("responseList");
-        if (responseList == null || responseList.isEmpty())
-            responseList = new ArrayList<>();
-        responseList.add(qResponse);
-        session.setAttribute("responseList",responseList);
+        Set<QuestionResponse> responseSet = (Set<QuestionResponse>) session.getAttribute("responseList");
+        if (responseSet == null || responseSet.isEmpty())
+            responseSet = new HashSet<>();
+        // check if repsonse already exists, if yes then remove previous response
+        responseSet = this.questionResponseService.removeResponseIfExists(responseSet, qResponse);
+        responseSet.add(qResponse);
+        session.setAttribute("responseList", responseSet);
 
         System.out.println(session.getAttribute("responseList"));
-        return "redirect:/child/screening/"+(++questionId);
+        return "redirect:/child/screening/" + (++questionId);
     }
 }

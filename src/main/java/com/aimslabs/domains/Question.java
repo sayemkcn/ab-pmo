@@ -9,6 +9,7 @@ import java.util.Arrays;
 @Entity
 public class Question extends BaseEntity {
     private String name;
+    @Column(unique = true)
     private int questionId;
     @Column(length = 10000000)
     @Basic(fetch = FetchType.LAZY, optional = true)
