@@ -3,6 +3,9 @@ package com.aimslabs.controllers;
 import com.aimslabs.domains.Child;
 import com.aimslabs.domains.Question;
 import com.aimslabs.domains.QuestionResponse;
+import com.aimslabs.domains.User;
+import com.aimslabs.services.ChildService;
+import com.aimslabs.services.ParentService;
 import com.aimslabs.services.QuestionResponseService;
 import com.aimslabs.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,10 @@ public class ChildController {
     private QuestionService questionService;
     @Autowired
     private QuestionResponseService questionResponseService;
+    @Autowired
+    private ChildService childService;
+    @Autowired
+    private ParentService parentService;
 
     // -------SCREENING ------ //
     @RequestMapping(value = "/screening/start", method = RequestMethod.GET)
@@ -68,10 +75,18 @@ public class ChildController {
         responseList.add(qResponse);
         session.setAttribute("responseList", responseList);
 
-        if (questionId >= 4) {
+        // If screening test over
+        if (questionId >= this.questionService.getAll().size()) {
             Child child = (Child) session.getAttribute("child");
             child.setResponseList((List<QuestionResponse>) session.getAttribute("responseList"));
-            System.out.println(this.questionResponseService.isAutismDetected(child));
+            child.setAppResult(this.childService.isAutismDetected(child));
+            User user = (User) session.getAttribute("user");
+            if (user == null)
+                return "redirect:/login";
+            child.setParent(this.parentService.getParentByUser(user));
+            this.childService.saveChild(child);
+            System.out.println(this.childService.isAutismDetected(child));
+            return "redirect:/dashboard";
         }
         System.out.println(session.getAttribute("responseList"));
         return "redirect:/child/screening/" + (++questionId);
