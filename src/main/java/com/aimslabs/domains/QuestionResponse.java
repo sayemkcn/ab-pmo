@@ -27,4 +27,12 @@ public class QuestionResponse extends BaseEntity{
     public void setUserResponse(boolean userResponse) {
         this.userResponse = userResponse;
     }
+
+    @Override
+    public String toString() {
+        return "QuestionResponse{" +
+                "questionId=" + questionId +
+                ", userResponse=" + userResponse +
+                '}';
+    }
 }

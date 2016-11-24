@@ -3,6 +3,7 @@ package com.aimslabs.domains;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by sayemkcn on 11/9/16.
@@ -17,7 +18,7 @@ public class Child extends BaseEntity {
     private boolean doctorResult;
 
     @ElementCollection
-    private List<QuestionResponse> responseList;
+    private List<QuestionResponse> responseSet;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Parent parent;
@@ -47,12 +48,12 @@ public class Child extends BaseEntity {
         this.birthDate = birthDate;
     }
 
-    public List<QuestionResponse> getResponseList() {
-        return responseList;
+    public List<QuestionResponse> getResponseSet() {
+        return responseSet;
     }
 
-    public void setResponseList(List<QuestionResponse> responseList) {
-        this.responseList = responseList;
+    public void setResponseSet(List<QuestionResponse> responseSet) {
+        this.responseSet = responseSet;
     }
 
     public boolean isAppResult() {
@@ -87,4 +88,18 @@ public class Child extends BaseEntity {
         this.parent = parent;
     }
 
+    @Override
+    public String toString() {
+        return "Child{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", birthDate=" + birthDate +
+                ", appResult=" + appResult +
+                ", doctorNote='" + doctorNote + '\'' +
+                ", doctorResult=" + doctorResult +
+                ", responseSet=" + responseSet +
+                ", parent=" + parent +
+                '}';
+    }
 }
+

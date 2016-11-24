@@ -9,13 +9,14 @@ import java.util.Arrays;
 @Entity
 public class Question extends BaseEntity {
     private String name;
+    @Column(unique = true)
     private int questionId;
     @Column(length = 10000000)
     @Basic(fetch = FetchType.LAZY, optional = true)
     private byte[] file;
     private String positiveText;
     private String negativeText;
-    private boolean autismDitectedForPositiveText;
+    private boolean autismDetectedForPositiveText;
     private boolean critical;
 
     public String getName() {
@@ -58,12 +59,12 @@ public class Question extends BaseEntity {
         this.negativeText = negativeText;
     }
 
-    public boolean isAutismDitectedForPositiveText() {
-        return autismDitectedForPositiveText;
+    public boolean isAutismDetectedForPositiveText() {
+        return autismDetectedForPositiveText;
     }
 
-    public void setAutismDitectedForPositiveText(boolean autismDitectedForPositiveText) {
-        this.autismDitectedForPositiveText = autismDitectedForPositiveText;
+    public void setAutismDetectedForPositiveText(boolean autismDetectedForPositiveText) {
+        this.autismDetectedForPositiveText = autismDetectedForPositiveText;
     }
 
     public boolean isCritical() {

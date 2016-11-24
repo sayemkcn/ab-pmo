@@ -7,10 +7,7 @@ import com.aimslabs.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -27,8 +24,17 @@ public class ParentController {
 
     // -------CREATE PROFILE ------- //
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String createProfilePage() {
-        return "parents/profile/create";
+    public String createProfilePage(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        // check if user loggedIn
+        if (user != null) {
+            user = this.userService.getUser(user.getId());
+            Parent parent = this.parentService.getParentByUser(user);
+            if (parent != null)
+                return "redirect:/profile/update";
+            return "parents/profile/create";
+        }
+        return "redirect:/login";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -42,20 +48,21 @@ public class ParentController {
     }
 
     // -----UPDATE PROFILE ----- //
-    @RequestMapping(value = "/update/{userId}", method = RequestMethod.GET)
-    public String updateProfilePage(@PathVariable("userId") Long userId, Model model, HttpSession session) {
-        if (session.getAttribute("user") == null)
+    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    public String updateProfilePage(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        // check if user logged in
+        if (user == null)
             return "redirect:/login";
-        User user = this.userService.getUser(userId);
+        // check if loggedin user matches
         Parent parent = this.parentService.getParentByUser(user);
         model.addAttribute("parent", parent);
         return "parents/profile/update";
     }
 
-    @RequestMapping(value = "/update/{userId}", method = RequestMethod.POST)
-    public String updateProfile(@ModelAttribute Parent parent,
-                                @PathVariable("userId") Long userId) {
-        User user = this.userService.getUser(userId);
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String updateProfile(@ModelAttribute Parent parent,HttpSession session) {
+        User user = (User) session.getAttribute("user");
         // find exiting user to get id of this entity // set it to the new entity so that it doen't create new row instead of updating.
         Parent existingParent = this.parentService.getParentByUser(user);
         parent.setId(existingParent.getId());
