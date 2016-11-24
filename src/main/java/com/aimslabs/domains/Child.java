@@ -17,8 +17,8 @@ public class Child extends BaseEntity {
     private String doctorNote;
     private boolean doctorResult;
 
-    @ElementCollection
-    private List<QuestionResponse> responseSet;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<QuestionResponse> responseList;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Parent parent;
@@ -48,12 +48,12 @@ public class Child extends BaseEntity {
         this.birthDate = birthDate;
     }
 
-    public List<QuestionResponse> getResponseSet() {
-        return responseSet;
+    public List<QuestionResponse> getResponseList() {
+        return responseList;
     }
 
-    public void setResponseSet(List<QuestionResponse> responseSet) {
-        this.responseSet = responseSet;
+    public void setResponseList(List<QuestionResponse> responseList) {
+        this.responseList = responseList;
     }
 
     public boolean isAppResult() {
@@ -88,18 +88,6 @@ public class Child extends BaseEntity {
         this.parent = parent;
     }
 
-    @Override
-    public String toString() {
-        return "Child{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", birthDate=" + birthDate +
-                ", appResult=" + appResult +
-                ", doctorNote='" + doctorNote + '\'' +
-                ", doctorResult=" + doctorResult +
-                ", responseSet=" + responseSet +
-                ", parent=" + parent +
-                '}';
-    }
+
 }
 
