@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3">
                 <h3>Create Profile:</h3>
-                <form class="form" th:action="@{/profile/update/}+${session?.user?.getId()}" th:object="${parent}" method="post"
+                <form class="form" th:action="@{/profile/update}" th:object="${parent}" method="post"
                       enctype="multipart/form-data">
                     <div class="form-group">
                         <label class="label label-success" for="name">Your name</label>
