@@ -56,10 +56,6 @@ public class ChildController {
                                          @RequestParam("userResponse") Boolean userResponse,
                                          HttpSession session) {
         QuestionResponse qResponse = new QuestionResponse();
-        // check if this response already exists
-//        QuestionResponse existionResponse = this.questionResponseService.getOne(questionId.longValue());
-//        if (existionResponse != null) // if exists then update bye setting id
-//            qResponse.setId(existionResponse.getId()); // Bye the way, questionId is being used as response primary id
         qResponse.setQuestionId(questionId);
         qResponse.setUserResponse(userResponse);
 
@@ -72,6 +68,11 @@ public class ChildController {
         responseList.add(qResponse);
         session.setAttribute("responseList", responseList);
 
+        if (questionId >= 4) {
+            Child child = (Child) session.getAttribute("child");
+            child.setResponseList((List<QuestionResponse>) session.getAttribute("responseList"));
+            System.out.println(this.questionResponseService.isAutismDetected(child));
+        }
         System.out.println(session.getAttribute("responseList"));
         return "redirect:/child/screening/" + (++questionId);
     }

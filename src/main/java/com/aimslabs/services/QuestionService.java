@@ -23,6 +23,10 @@ public class QuestionService {
         return this.questionRepo.findAll();
     }
 
+    public List<Question> getAllOrderByQuestionId(){
+        return this.questionRepo.findAllByOrderByQuestionIdAsc();
+    }
+
     @Transactional(readOnly = true)
     public Question getOne(Long id) {
         return this.questionRepo.getOne(id);

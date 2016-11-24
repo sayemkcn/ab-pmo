@@ -18,7 +18,7 @@ public class Child extends BaseEntity {
     private boolean doctorResult;
 
     @ElementCollection
-    private List<QuestionResponse> responseSet;
+    private List<QuestionResponse> responseList;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Parent parent;
@@ -48,12 +48,12 @@ public class Child extends BaseEntity {
         this.birthDate = birthDate;
     }
 
-    public List<QuestionResponse> getResponseSet() {
-        return responseSet;
+    public List<QuestionResponse> getResponseList() {
+        return responseList;
     }
 
-    public void setResponseSet(List<QuestionResponse> responseSet) {
-        this.responseSet = responseSet;
+    public void setResponseList(List<QuestionResponse> responseList) {
+        this.responseList = responseList;
     }
 
     public boolean isAppResult() {
@@ -97,7 +97,7 @@ public class Child extends BaseEntity {
                 ", appResult=" + appResult +
                 ", doctorNote='" + doctorNote + '\'' +
                 ", doctorResult=" + doctorResult +
-                ", responseSet=" + responseSet +
+                ", responseList=" + responseList +
                 ", parent=" + parent +
                 '}';
     }
