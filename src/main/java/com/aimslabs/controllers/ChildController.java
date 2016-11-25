@@ -1,9 +1,6 @@
 package com.aimslabs.controllers;
 
-import com.aimslabs.domains.Child;
-import com.aimslabs.domains.Question;
-import com.aimslabs.domains.QuestionResponse;
-import com.aimslabs.domains.User;
+import com.aimslabs.domains.*;
 import com.aimslabs.services.ChildService;
 import com.aimslabs.services.ParentService;
 import com.aimslabs.services.QuestionResponseService;
@@ -33,9 +30,22 @@ public class ChildController {
     @Autowired
     private ParentService parentService;
 
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public String childList(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null)
+            return "redirect:/login";
+        Parent parent = this.parentService.getParentByUser(user);
+        model.addAttribute("childList", parent.getChildList());
+        return "child/all";
+    }
+
     // -------SCREENING ------ //
     @RequestMapping(value = "/screening/start", method = RequestMethod.GET)
-    public String startScreeningPage() {
+    public String startScreeningPage(HttpSession session) {
+        if (session.getAttribute("user") == null)
+            return "redirect:/login";
         return "parents/screening/start";
     }
 
@@ -46,7 +56,7 @@ public class ChildController {
             System.out.println(bindingResult.toString());
         session.setAttribute("child", child);
 
-        System.out.println(session.getAttribute("child"));
+//        System.out.println(session.getAttribute("child"));
         return "redirect:/child/screening/1";
     }
 
@@ -79,14 +89,21 @@ public class ChildController {
         if (questionId >= this.questionService.getAll().size()) {
             Child child = (Child) session.getAttribute("child");
             child.setResponseList((List<QuestionResponse>) session.getAttribute("responseList"));
-            child.setAppResult(this.childService.isAutismDetected(child));
+            boolean isDetected = this.childService.isAutismDetected(child);
+            child.setAppResult(isDetected);
             User user = (User) session.getAttribute("user");
             if (user == null)
                 return "redirect:/login";
             child.setParent(this.parentService.getParentByUser(user));
             this.childService.saveChild(child);
-            System.out.println(this.childService.isAutismDetected(child));
-            return "redirect:/dashboard";
+            // clear session data
+            session.removeAttribute("child");
+            session.removeAttribute("responseList");
+//            System.out.println(this.childService.isAutismDetected(child));
+            if (isDetected)
+                return "redirect:/child?message=" + child.getName() + " is in a risk of Autism. Please contact nearest Autism center immediately!";
+            else
+                return "redirect:/child?message=Nothing to be worried yet! " + child.getName() + " is functioning properly.";
         }
         System.out.println(session.getAttribute("responseList"));
         return "redirect:/child/screening/" + (++questionId);

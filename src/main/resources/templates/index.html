@@ -28,6 +28,7 @@
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a th:href="@{/dashboard}">Dashboard</a></li>
+                        <li><a th:href="@{/child}">My Childs</a></li>
                         <li><a th:href="@{/profile}">Profile</a></li>
                         <li th:if="${session.user != null}"><a th:href="@{/profile/create}">Create Profile</a></li>
                     </ul>
@@ -40,7 +41,7 @@
                         <li><a th:href="@{/questions/create}">Create Question</a></li>
                     </ul>
                 </li>
-                <li><a th:href="@{/child/screening/start}">Screening</a></li>
+                <li><a th:href="@{/child/screening/start}">Start Screening</a></li>
             </ul>
             <!--IF NOT LOGGED IN-->
             <ul th:if="${session.user == null}" class="nav navbar-nav navbar-right">
@@ -53,7 +54,8 @@
             </ul>
         </div>
     </div>
-</nav>
+</nav><!--END NAVBAR -->
+
 <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
         Hello World!

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"></meta>
-    <title>Dashboard</title>
+    <title>All Questions</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -54,12 +54,44 @@
         </div>
     </div>
 </nav>  <!--END NAVBAR -->
-<div class="row" style="padding-left: 50px;" th:if="${param.message != null}">
-    <span class="alert alert-warning" th:text="${param.message[0]}"></span>
-</div>
-<div class="row">
-    <div class="col-sm-8 col-sm-offset-2">
-        Dashboard
+
+    <div class="row" style="padding-left: 50px;">
+    <div th:if="${param.message != null}" class="row alert alert-warning">
+        <div class="col-sm-offset-2">
+            <span th:text="${param.message[0]}"></span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <h3>Child List</h3>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Age</td>
+                    <td>Birth Date</td>
+                    <td>App Result</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${childList != null}" th:each="child : ${childList}">
+                    <td>
+                        <span th:text="${child.getName()}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${child.getAge()}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${child.getBirthDate()?.toString()}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${child.isAppResult()}"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 </body>
