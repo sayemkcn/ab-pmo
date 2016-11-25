@@ -20,6 +20,11 @@ public class ChildServiceImpl implements ChildService {
     private ChildRepository childRepo;
 
     @Override
+    public List<Child> getAllChild() {
+        return this.childRepo.findAll();
+    }
+
+    @Override
     public Child saveChild(Child child) {
         return this.childRepo.saveAndFlush(child);
     }
