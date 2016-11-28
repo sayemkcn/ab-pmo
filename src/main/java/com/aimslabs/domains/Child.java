@@ -1,13 +1,12 @@
 package com.aimslabs.domains;
 
-import com.aimslabs.domains.pojo.JsonDateSerializer;
+import com.aimslabs.rest.rest_config.JsonDateSerializer;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by sayemkcn on 11/9/16.

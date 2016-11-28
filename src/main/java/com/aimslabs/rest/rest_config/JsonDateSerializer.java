@@ -1,4 +1,4 @@
-package com.aimslabs.domains.pojo;
+package com.aimslabs.rest.rest_config;
 
 /**
  * Author: rezaul || Date: 11/24/16.

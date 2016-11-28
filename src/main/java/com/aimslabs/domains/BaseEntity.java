@@ -1,6 +1,6 @@
 package com.aimslabs.domains;
 
-import com.aimslabs.domains.pojo.JsonDateSerializer;
+import com.aimslabs.rest.rest_config.JsonDateSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
