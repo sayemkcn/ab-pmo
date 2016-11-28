@@ -1,6 +1,7 @@
 package com.aimslabs.domains;
 
 import com.aimslabs.domains.pojo.Address;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -20,6 +21,7 @@ public class Parent extends BaseEntity {
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "parent")
+    @JsonManagedReference
     private List<Child> childList;
 
     public String getName() {

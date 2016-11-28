@@ -1,5 +1,9 @@
 package com.aimslabs.domains;
 
+import com.aimslabs.domains.pojo.JsonDateSerializer;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -11,18 +15,30 @@ import java.util.Set;
 @Entity
 public class Child extends BaseEntity {
     private String name;
-    private float age;
+    @JsonSerialize(using=JsonDateSerializer.class)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date birthDate;
     private boolean appResult;
     private String doctorNote;
     private boolean doctorResult;
+    private boolean sentFromMobileApp;
 
-    @OneToMany(cascade = CascadeType.ALL)
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<QuestionResponse> responseList;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "PARENT_ID")
+    @JsonBackReference
     private Parent parent;
 
+    public boolean isSentFromMobileApp() {
+        return sentFromMobileApp;
+    }
+
+    public void setSentFromMobileApp(boolean sentFromMobileApp) {
+        this.sentFromMobileApp = sentFromMobileApp;
+    }
 
     public String getName() {
         return name;
@@ -30,14 +46,6 @@ public class Child extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public float getAge() {
-        return age;
-    }
-
-    public void setAge(float age) {
-        this.age = age;
     }
 
     public Date getBirthDate() {
