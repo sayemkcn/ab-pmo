@@ -58,7 +58,11 @@
     </nav>  <!--END NAVBAR -->
 
     <div class="container-fluid">
-
+        <div th:if="${param.message != null}" class="row alert alert-warning">
+            <div class="col-sm-8 col-sm-offset-2">
+                <span th:text="${param.message[0]}"></span>
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3">
                 <h3>Create Profile:</h3>

@@ -44,8 +44,12 @@ public class ChildController {
     // -------SCREENING ------ //
     @RequestMapping(value = "/screening/start", method = RequestMethod.GET)
     public String startScreeningPage(HttpSession session) {
-        if (session.getAttribute("user") == null)
+        User user = (User) session.getAttribute("user");
+        // Check if user is logged in
+        if (user == null)
             return "redirect:/login";
+        else if (this.parentService.getParentByUser(user) == null)
+            return "redirect:/profile/create?message=You must create a profile first!";
         return "parents/screening/start";
     }
 

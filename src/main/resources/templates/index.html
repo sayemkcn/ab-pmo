@@ -34,9 +34,10 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/questions}">Questions
+                    <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/questions}">Admin
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        <li><a th:href="@{/admin/child?page=0}">Child List</a></li>
                         <li><a th:href="@{/questions}">Questions</a></li>
                         <li><a th:href="@{/questions/create}">Create Question</a></li>
                     </ul>

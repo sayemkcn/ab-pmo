@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface ChildService {
 
-    List<Child> getAllChild();
+    List<Child> getAllChildPaginated(int page,int size);
 
     Child saveChild(Child child);
 

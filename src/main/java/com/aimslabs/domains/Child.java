@@ -11,7 +11,7 @@ import java.util.Set;
 @Entity
 public class Child extends BaseEntity {
     private String name;
-    private float age;
+    private float age; // will be removed
     private Date birthDate;
     private boolean appResult;
     private String doctorNote;

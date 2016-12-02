@@ -5,6 +5,10 @@ import com.aimslabs.domains.Question;
 import com.aimslabs.domains.QuestionResponse;
 import com.aimslabs.repositories.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,14 +18,18 @@ import java.util.List;
  */
 @Service
 public class ChildServiceImpl implements ChildService {
+
+    private static final String FIELD_NAME = "id";
+
     @Autowired
     private QuestionRepository questionRepo;
     @Autowired
     private ChildRepository childRepo;
 
     @Override
-    public List<Child> getAllChild() {
-        return this.childRepo.findAll();
+    public List<Child> getAllChildPaginated(int page, int size) {
+        Page<Child> childPage = this.childRepo.findAll(new PageRequest(page, size, Sort.Direction.DESC, FIELD_NAME));
+        return childPage.getContent();
     }
 
     @Override
@@ -46,7 +54,6 @@ public class ChildServiceImpl implements ChildService {
                 if (question.isCritical())
                     crutialMatches++;
             }
-
         }
         System.out.println("MATCH: " + matches + "\nCRUTIAL MATCHES: " + crutialMatches);
         return crutialMatches >= 2 || matches >= 3;

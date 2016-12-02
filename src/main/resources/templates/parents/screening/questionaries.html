@@ -71,7 +71,7 @@
                 <img height="200px" width="300px" th:src="@{/questions/image/}+${question?.getId()}"></img>
             </div>
             <div th:if="${question != null}" class="row">
-                <div th:if="${question?.getQuestionId()>1}" class="col-sm-3">
+                <div class="col-sm-3">
                     <form th:action="@{/child/screening/{userId}(userResponse=false,userId=${question?.getQuestionId()})}" method="post">
                         <button type="submit"><span th:text="${question?.getNegativeText()}"></span></button>
                     </form>
