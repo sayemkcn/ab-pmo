@@ -74,4 +74,17 @@ public class Question extends BaseEntity {
     public void setCritical(boolean critical) {
         this.critical = critical;
     }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "name='" + name + '\'' +
+                ", questionId=" + questionId +
+                ", file=" + Arrays.toString(file) +
+                ", positiveText='" + positiveText + '\'' +
+                ", negativeText='" + negativeText + '\'' +
+                ", autismDetectedForPositiveText=" + autismDetectedForPositiveText +
+                ", critical=" + critical +
+                '}';
+    }
 }

@@ -42,6 +42,10 @@ public class QuestionService {
         return this.questionRepo.saveAndFlush(question);
     }
 
+    public void createQuestionList(List<Question> questions) {
+        questionRepo.save(questions);
+    }
+
     @Transactional(readOnly = false)
     public void delete(Long id) {
         this.questionRepo.delete(id);

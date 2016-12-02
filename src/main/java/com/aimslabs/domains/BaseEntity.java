@@ -1,5 +1,9 @@
 package com.aimslabs.domains;
 
+import com.aimslabs.rest.rest_config.JsonDateSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -11,8 +15,10 @@ public abstract class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @JsonSerialize(using=JsonDateSerializer.class)
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
+    @JsonIgnore
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdated;
 
