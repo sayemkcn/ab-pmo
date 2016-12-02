@@ -1,4 +1,4 @@
-package com.aimslabs.controllers;
+package com.aimslabs.controllers.admin;
 
 import com.aimslabs.commons.ImageValidator;
 import com.aimslabs.domains.Question;
@@ -17,8 +17,8 @@ import java.io.IOException;
  * Created by sayemkcn on 11/9/16.
  */
 @Controller
-@RequestMapping(value = "/questions")
-public class QuestionController {
+@RequestMapping(value = "/admin/questions")
+public class QuestionCtrl {
 
     @Autowired
     private QuestionService questionService;
@@ -46,7 +46,7 @@ public class QuestionController {
             question.setFile(multipartFile.getBytes());
         }
         this.questionService.save(question);
-        return "redirect:/questions?message=Successful!";
+        return "redirect:/admin/questions?message=Successful!";
     }
 
     // -------- UPDATE -------//
@@ -69,7 +69,7 @@ public class QuestionController {
             if (imageValidator.isImageValid(multipartFile))
                 existingQuestion.setFile(multipartFile.getBytes());
             else
-                return "redirect:/questions/update/" + id + "?message=file is not valid!";
+                return "redirect:/admin/questions/update/" + id + "?message=file is not valid!";
         }
         // The reason for copying new entity to existing entity is, when updating entity created date will be saved null because @PrePersist will not be executed this time.
         existingQuestion.setName(question.getName());
@@ -79,14 +79,14 @@ public class QuestionController {
         existingQuestion.setCritical(question.isCritical());
         existingQuestion.setAutismDetectedForPositiveText(question.isAutismDetectedForPositiveText());
         this.questionService.save(existingQuestion);
-        return "redirect:/questions?message=Successfully updated question " + existingQuestion.getQuestionId();
+        return "redirect:/admin/questions?message=Successfully updated question " + existingQuestion.getQuestionId();
     }
 
     // ------ DELETE -----//
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     private String deleteQuestion(@PathVariable("id") Long id) {
         this.questionService.delete(id);
-        return "redirect:/questions?message=Successfully deleted question.";
+        return "redirect:/admin/questions?message=Successfully deleted question.";
     }
 
     // ------ IMAGE -----//
