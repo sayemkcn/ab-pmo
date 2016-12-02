@@ -69,7 +69,7 @@
                 <h3 th:text="${question?.getName()}"></h3>
             </div>
             <div class="row">
-                <img height="200px" width="300px" th:src="@{/questions/image/}+${question?.getId()}"></img>
+                <img height="200px" width="300px" th:src="@{/admin/questions/image/}+${question?.getId()}"></img>
             </div>
             <div th:if="${question != null}" class="row">
                 <div class="col-sm-3">

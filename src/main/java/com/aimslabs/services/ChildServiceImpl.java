@@ -34,7 +34,7 @@ public class ChildServiceImpl implements ChildService {
 
     @Override
     public Child saveChild(Child child) {
-        return this.childRepo.saveAndFlush(child);
+        return childRepo.saveAndFlush(child);
     }
 
     @Override

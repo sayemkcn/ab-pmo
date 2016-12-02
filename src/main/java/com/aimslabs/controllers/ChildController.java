@@ -107,7 +107,7 @@ public class ChildController {
             if (isDetected)
                 return "redirect:/child?message=" + child.getName() + " is in a risk of Autism. Please contact nearest Autism center immediately!";
             else
-                return "redirect:/child?message=Nothing to be worried yet! " + child.getName() + " is functioning properly.";
+                return "redirect:/child?message=Nothing to be worried about yet! " + child.getName() + " is functioning properly.";
         }
         System.out.println(session.getAttribute("responseList"));
         return "redirect:/child/screening/" + (++questionId);
