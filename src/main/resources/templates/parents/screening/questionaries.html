@@ -68,10 +68,10 @@
             <div class="row">
                 <h3 th:text="${question?.getName()}"></h3>
             </div>
-            <div class="row">
-                <img height="200px" width="300px" th:src="@{/admin/questions/image/}+${question?.getId()}"></img>
+            <div class="row" style="padding-left: 0px;">
+                <img height="350px" width="500px" th:src="@{/admin/questions/image/}+${question?.getId()}"></img>
             </div>
-            <div th:if="${question != null}" class="row">
+            <div th:if="${question != null}" class="row" style="margin-top: 30px;">
                 <div class="col-sm-3">
                     <form th:action="@{/child/screening/{userId}(userResponse=false,userId=${question?.getQuestionId()})}" method="post">
                         <button type="submit"><span th:text="${question?.getNegativeText()}"></span></button>

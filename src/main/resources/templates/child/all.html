@@ -56,8 +56,8 @@
     </div>
 </nav><!--END NAVBAR -->
 
-<div class="row" style="padding-left: 50px;">
-    <div th:if="${param.message != null}" class="row alert alert-warning">
+<div class="row">
+    <div th:if="${param.message != null}" class="row alert alert-warning" style="padding-left: 50px;">
         <div class="col-sm-offset-2">
             <span th:text="${param.message[0]}"></span>
         </div>
