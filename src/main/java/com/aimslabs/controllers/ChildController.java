@@ -56,6 +56,8 @@ public class ChildController {
     @RequestMapping(value = "/screening/start", method = RequestMethod.POST)
     public String startScreening(@ModelAttribute Child child, BindingResult bindingResult,
                                  HttpSession session) {
+        if (session.getAttribute("user") == null)
+            return "redirect:/login";
         if (bindingResult.hasErrors())
             System.out.println(bindingResult.toString());
         session.setAttribute("child", child);

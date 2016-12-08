@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +20,12 @@ import java.io.IOException;
 @Controller
 @RequestMapping(value = "/admin/questions")
 public class QuestionCtrl {
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.setDisallowedFields("file");
+    }
+
 
     @Autowired
     private QuestionService questionService;
@@ -72,7 +79,7 @@ public class QuestionCtrl {
                 return "redirect:/admin/questions/update/" + id + "?message=file is not valid!";
         }
         // The reason for copying new entity to existing entity is, when updating entity created date will be saved null because @PrePersist will not be executed this time.
-        existingQuestion.setName(question.getName());
+        existingQuestion.setTitle(question.getTitle());
         existingQuestion.setQuestionId(question.getQuestionId());
         existingQuestion.setPositiveText(question.getPositiveText());
         existingQuestion.setNegativeText(question.getNegativeText());

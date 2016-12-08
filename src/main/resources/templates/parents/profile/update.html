@@ -1,108 +1,329 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"></meta>
-    <title>Update Profile</title>
+    <title>Interactive, community-based screening tool for Autism | Home :: Autism Barta</title>
+    <!--mobile apps-->
     <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+    <meta name="keywords" content="Interactive, community-based screening tool for Autism, Autism Barta"></meta>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <!--mobile apps-->
+    <!--Custom Theme files -->
+    <link th:href="@{/css/bootstrap.css}" type="text/css" rel="stylesheet" media="all"></link>
+    <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet" media="all">
+    </link>
+    <link rel="stylesheet" type="text/css" th:href="@{css/component.css}"></link>
+    <!-- //Custom Theme files -->
+    <!-- js -->
+    <script th:src="@{js/modernizr.custom.js}"></script>
+
+    <script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{js/move-top.js}"></script>
+    <script type="text/javascript" th:src="@{js/easing.js}"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({scrollTop: $(this.hash).offset().top}, 900);
+            });
+        });
+    </script>
+
+    <!-- //js -->
+    <!--web-fonts-->
+    <link href='//fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'></link>
+    <link href='//fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'></link>
+    <!--//web-fonts-->
+    <!--animate-->
+    <link th:href="@{/css/animate.css}" rel="stylesheet" type="text/css" media="all"></link>
+    <script th:src="@{js/wow.min.js}"></script>
+    <script>
+        new WOW().init();
+    </script>
+    <!--//end-animate-->
+    <!-- start-smoth-scrolling-->
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
+            });
+        });
+    </script>
+    <!--//end-smoth-scrolling-->
 </head>
+
 <body>
+<!--w3layouts-->
+<!--agileits-->
+<!-- main content start-->
+<!--start-home-->
+<div id="home" class="header">
+    <!--start-header-->
+    <div class="header-strip">
+        <div class="container">
+            <!-- 				<p class="phonenum"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> HELP LINE:  162362
 
-<div>
-    <nav class="navbar navbar-inverse row" style="padding-left: 100px;padding-right: 100px;">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" th:href="@{/}">Autism Barta</a>
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                    <li><a th:href="@{/}">Home</a></li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/dashboard}">Dashboard
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a th:href="@{/dashboard}">Dashboard</a></li>
-                            <li><a th:href="@{/child}">My Childs</a></li>
-                            <li><a th:href="@{/profile}">Profile</a></li>
-                            <li th:if="${session.user != null}"><a th:href="@{/profile/create}">Create Profile</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/admin/questions}">Admin
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a th:href="@{/admin/child?page=0}">Child List</a></li>
-                            <li><a th:href="@{/admin/questions}">Questions</a></li>
-                            <li><a th:href="@{/admin/questions/create}">Create Question</a></li>
-                        </ul>
-                    </li>
-                    <li><a th:href="@{/child/screening/start}">Start Screening</a></li>
-                </ul>
+             &nbsp;&nbsp; Register | &nbsp;Log In</p> -->
+            <div class="social-icons">
                 <!--IF NOT LOGGED IN-->
-                <ul th:if="${session.user == null}" class="nav navbar-nav navbar-right">
-                    <li><a th:href="@{/register}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <!--IF NOT LOGGED IN-->
+                <ul th:if="${session.user == null}">
+                    <li><a th:href="@{/register}" class="account"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
+                    </li>
+                    <li><a th:href="@{/login}" class="account"><span class="glyphicon glyphicon-log-in"></span>
+                        Login</a></li>
                 </ul>
-                <ul th:if="${session.user != null}" class="nav navbar-nav navbar-right">
-                    <li><a th:href="@{/profile}"><span th:text="${session.user.getName()}"></span></a></li>
-                    <li><a th:href="@{/logout}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                <ul th:if="${session.user != null}">
+                    <li><a th:href="@{/profile}" class="account"><span th:text="${session.user.getName()}"></span></a>
+                    </li>
+                    <li><a th:href="@{/logout}" class="account"><span class="glyphicon glyphicon-log-in"></span> Logout</a>
+                    </li>
                 </ul>
             </div>
+            <div class="clearfix"></div>
         </div>
-    </nav><!--END NAVBAR -->
-
-    <div class="container-fluid">
-
-        <div class="row">
-            <div class="col-sm-6 col-sm-offset-3">
-                <h3>Create Profile:</h3>
-                <form class="form" th:action="@{/profile/update}" th:object="${parent}" method="post"
-                      enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label class="label label-success" for="name">Your name</label>
-                        <input class="form-control" type="text" name="name" th:value="${parent?.getName()}" id="name" placeholder="You Name"></input>
-                    </div>
-                    <div class="form-group">
-                        <label class="label label-success" for="phoneNumber">Phone Number</label>
-                        <input class="form-control" type="text" id="phoneNumber" th:value="${parent?.getPhoneNumber()}" name="phoneNumber"></input>
-                    </div>
-                    <div class="form-group">
-                        <h4>Address:</h4>
-                        <div class="form-group">
-                            <label class="label label-success" for="street">Street</label>
-                            <input class="form-control" type="text" id="street" th:value="${parent?.getAddress()?.getStreet()}" name="address.street"></input>
-                        </div>
-                        <div class="form-group">
-                            <label class="label label-success" for="thana">Thana</label>
-                            <input class="form-control" type="text" name="address.thana" th:value="${parent?.getAddress()?.getThana()}" id="thana"></input>
-                        </div>
-                        <div class="form-group">
-                            <label class="label label-success" for="district">District</label>
-                            <input class="form-control" type="text" name="address.district" th:value="${parent?.getAddress()?.getDistrict()}" id="district"></input>
-                        </div>
-                        <div class="form-group">
-                            <label class="label label-success" for="postCode">Post Code</label>
-                            <input class="form-control" type="number" name="address.postCode" th:value="${parent?.getAddress()?.getPostCode()}" id="postCode"></input>
-                        </div>
-                        <div class="form-group">
-                            <label class="label label-success" for="division">Division</label>
-                            <input class="form-control" type="text" name="address.division" th:value="${parent?.getAddress()?.getDivision()}" id="division"></input>
-                        </div>
-                    </div>
-                    <button class="btn btn-success" type="submit">Create Profile</button>
-                </form>
+    </div>
+    <div class="header-top">
+        <div class="container">
+            <div class="logo"><a href="index.html" th:href="@{/}"><h1>Autism<span>Barta</span></h1>
+                <p class="top-para">Autism Community in Bangladesh.</p></a></div>
+            <div class="main-nav">
+                <span class="menu"></span>
+                <div class="top-menu">
+                    <ul class="nav navbar-nav">
+                        <li><a th:href="@{/}">Home</a></li>
+                        <li><a th:href="@{/child/screening/start}">Start Screening</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/dashboard}">Dashboard
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a th:href="@{/dashboard}">Dashboard</a></li>
+                                <li><a th:href="@{/child}">My Childs</a></li>
+                                <li><a th:href="@{/profile}">Profile</a></li>
+                                <li th:if="${session.user != null}"><a th:href="@{/profile/create}">Create Profile</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/admin/questions}">Admin
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a th:href="@{/admin/child?page=0}">Child List</a></li>
+                                <li><a th:href="@{/admin/questions}">Questions</a></li>
+                                <li><a th:href="@{/admin/questions/create}">Create Question</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div> <!--NAVIGATION-->
             </div>
-
+            <!-- script-for-menu -->
+            <script>
+                $("span.menu").click(function () {
+                    $(".top-menu").slideToggle("slow", function () {
+                        // Animation complete.
+                    });
+                });
+            </script>
+            <!--End-top-nav-script-->
+            <!--//end-header-->
+            <div class="clearfix"></div>
         </div>
+        <!--start-banner
+                <div class="banner">
+                           <div class="container">
+                  <div class="banner-slider">
+                  <div class="callbacks_container">
+                      <ul class="rslides" id="slider4">
+                          <li>
+                             <div class="banner-info">
+                                    <h3 class="wow slideInUp"  data-wow-duration="1s" data-wow-delay=".3s">Welcome</h3>
+                                    <p class="wow slideInDown"  data-wow-duration="1s" data-wow-delay=".3s">
+  A Good Strategy</p>
 
+                                   <span class="wow slideInUp"  data-wow-duration="1s" data-wow-delay=".3s">Smart Choice !</span>
+                                </div>
+                          </li>
+                          <li>
+                             <div class="banner-info">
+                                  <h3 class="wow slideInUp"  data-wow-duration="1s" data-wow-delay=".3s">We Love</h3>
+                                   <p class="wow slideInDown"  data-wow-duration="1s" data-wow-delay=".3s">Will Carry You Right</p>
+
+                                   <span class="wow slideInUp"  data-wow-duration="1s" data-wow-delay=".3s">Smart Choice !</span>
+                                </div>
+                          </li>
+                          <li>
+                             <div class="banner-info">
+                                    <h3 class="wow slideInUp"  data-wow-duration="1s" data-wow-delay=".3s">We Plan</h3>
+                                    <p class="wow slideInDown"  data-wow-duration="1s" data-wow-delay=".3s">Through Retirement </p>
+
+                                     <span class="wow slideInUpslideInLeft"  data-wow-duration="1s" data-wow-delay=".3s">Smart Choice !</span>
+                             </div>
+                        </li>
+                      </ul>
+            <script src="js/responsiveslides.min.js"></script>
+               <script>
+                  // You can also use "$(window).load(function() {"
+                  $(function () {
+                    // Slideshow 4
+                    $("#slider4").responsiveSlides({
+                      auto: true,
+                      pager:true,
+                      nav:true,
+                      speed: 500,
+                      namespace: "callbacks",
+                      before: function () {
+                        $('.events').append("<li>before event fired.</li>");
+                      },
+                      after: function () {
+                        $('.events').append("<li>after event fired.</li>");
+                      }
+                    });
+
+                  });
+                </script>
+
+
+
+                </div>
+                  </div>
+             </div>
+          </div> -->
     </div>
 </div>
+<!--//end-banner-->
+<!-- app-->
+<div class="modal ab fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog about" role="document">
+        <div class="modal-content about">
+            <div class="modal-header">
+                <button type="button" class="close ab" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body about">
+                <div class="about">
+                    <h4 class="tittle wow fadeInUp animated animated" data-wow-delay=".5s">Retirement Plans</h4>
+                    <div class="about-inner">
+
+                        <iframe src="https://www.youtube.com/embed/lj813_txFFc" frameborder="0"
+                                allowfullscreen="true"></iframe>
+                        <h5 class="tittle">Lorem ipsum dolor sit amet</h5>
+                        <p>Lorem ipsum dolor sit amet Integer gravida,Lorem ipsum dolor sit amet Integer gravida
+                            velit,Ming sits in the corner the whole day. She's into crochet. quis dolor
+                            tristiqumsan.Mirum est notare quam littera gothica, quam nunc putamus parum claram,
+                            anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. velit
+                            quis dolor tristiqumsan.</p>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //app-->
+<!-- about-type-grid -->
+<div class="about" id="about">
+
+    <div th:if="${param.message != null}" class="row alert alert-warning">
+        <div class="col-sm-offset-2">
+            <span th:text="${param.message[0]}"></span>
+        </div>
+    </div>
+
+    <div class="container" style="padding: 20px;">
+        <div th:if="${param.message != null}" class="row alert alert-warning" style="padding-left: 50px;">
+            <div class="col-sm-offset-2">
+                <span th:text="${param.message[0]}"></span>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-sm-offset-3">
+            <h3>Create Profile:</h3>
+            <form class="form" th:action="@{/profile/update}" th:object="${parent}" method="post"
+                  enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="label label-success" for="name">Your name</label>
+                    <input class="form-control" type="text" name="name" th:value="${parent?.getName()}" id="name" placeholder="You Name"></input>
+                </div>
+                <div class="form-group">
+                    <label class="label label-success" for="phoneNumber">Phone Number</label>
+                    <input class="form-control" type="text" id="phoneNumber" th:value="${parent?.getPhoneNumber()}" name="phoneNumber"></input>
+                </div>
+                <div class="form-group">
+                    <h4>Address:</h4>
+                    <div class="form-group">
+                        <label class="label label-success" for="homeAddress">Home Address</label>
+                        <input class="form-control" type="text" id="homeAddress" name="address.homeAddress" th:value="${parent?.getAddress()?.getHomeAddress()}"></input>
+                    </div>
+                    <div class="form-group">
+                        <label class="label label-success" for="streetOrVillage">Street or Village</label>
+                        <input class="form-control" type="text" name="address.streetOrVillage" id="streetOrVillage" th:value="${parent?.getAddress()?.getStreetOrVillage()}"></input>
+                    </div>
+                    <div class="form-group">
+                        <label class="label label-success" for="unionOrWard">Union or Ward</label>
+                        <input class="form-control" type="text" name="address.unionOrWard" id="unionOrWard" th:value="${parent?.getAddress()?.getUnionOrWard()}"></input>
+                    </div>
+                    <div class="form-group">
+                        <label class="label label-success" for="upazila">Upazila</label>
+                        <input class="form-control" type="text" name="address.upazila" id="upazila" th:value="${parent?.getAddress()?.getUpazila()}"></input>
+                    </div>
+                    <div class="form-group">
+                        <label class="label label-success" for="district">District</label>
+                        <input class="form-control" type="text" name="address.district" id="district" th:value="${parent?.getAddress()?.getDistrict()}"></input>
+                    </div>
+                    <div class="form-group">
+                        <label class="label label-success" for="division">Division</label>
+                        <input class="form-control" type="text" name="address.division" id="division" th:value="${parent?.getAddress()?.getDivision()}"></input>
+                    </div>
+                </div>
+                <button class="btn btn-success" type="submit">Create Profile</button>
+            </form>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<!-- //about-type-grid -->
+
+
+<!-- //footer -->
+<!--//main content start-->
+<!--start-smooth-scrolling-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        /*
+         var defaults = {
+         containerID: 'toTop', // fading element id
+         containerHoverID: 'toTopHover', // fading element hover id
+         scrollSpeed: 1200,
+         easingType: 'linear'
+         };
+         */
+
+        $().UItoTop({easingType: 'easeOutQuart'});
+
+    });
+
+</script>
+<!--end-smooth-scrolling-->
+<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover"
+                                                                         style="opacity: 1;"> </span></a>
+<!-- //for bootstrap working -->
+<!-- for bootstrap working -->
+<script th:src="@{/js/bootstrap.js}"></script>
+<!-- //for bootstrap working -->
+
+
 </body>
 </html>
