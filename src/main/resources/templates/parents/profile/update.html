@@ -76,24 +76,28 @@
                     <div class="form-group">
                         <h4>Address:</h4>
                         <div class="form-group">
-                            <label class="label label-success" for="street">Street</label>
-                            <input class="form-control" type="text" id="street" th:value="${parent?.getAddress()?.getStreet()}" name="address.street"></input>
+                            <label class="label label-success" for="homeAddress">Home Address</label>
+                            <input class="form-control" type="text" id="homeAddress" name="address.homeAddress" th:value="${parent?.getAddress()?.getHomeAddress()}"></input>
                         </div>
                         <div class="form-group">
-                            <label class="label label-success" for="thana">Thana</label>
-                            <input class="form-control" type="text" name="address.thana" th:value="${parent?.getAddress()?.getThana()}" id="thana"></input>
+                            <label class="label label-success" for="streetOrVillage">Street or Village</label>
+                            <input class="form-control" type="text" name="address.streetOrVillage" id="streetOrVillage" th:value="${parent?.getAddress()?.getStreetOrVillage()}"></input>
+                        </div>
+                        <div class="form-group">
+                            <label class="label label-success" for="unionOrWard">Union or Ward</label>
+                            <input class="form-control" type="text" name="address.unionOrWard" id="unionOrWard" th:value="${parent?.getAddress()?.getUnionOrWard()}"></input>
+                        </div>
+                        <div class="form-group">
+                            <label class="label label-success" for="upazila">Upazila</label>
+                            <input class="form-control" type="text" name="address.upazila" id="upazila" th:value="${parent?.getAddress()?.getUpazila()}"></input>
                         </div>
                         <div class="form-group">
                             <label class="label label-success" for="district">District</label>
-                            <input class="form-control" type="text" name="address.district" th:value="${parent?.getAddress()?.getDistrict()}" id="district"></input>
-                        </div>
-                        <div class="form-group">
-                            <label class="label label-success" for="postCode">Post Code</label>
-                            <input class="form-control" type="number" name="address.postCode" th:value="${parent?.getAddress()?.getPostCode()}" id="postCode"></input>
+                            <input class="form-control" type="text" name="address.district" id="district" th:value="${parent?.getAddress()?.getDistrict()}"></input>
                         </div>
                         <div class="form-group">
                             <label class="label label-success" for="division">Division</label>
-                            <input class="form-control" type="text" name="address.division" th:value="${parent?.getAddress()?.getDivision()}" id="division"></input>
+                            <input class="form-control" type="text" name="address.division" id="division" th:value="${parent?.getAddress()?.getDivision()}"></input>
                         </div>
                     </div>
                     <button class="btn btn-success" type="submit">Create Profile</button>

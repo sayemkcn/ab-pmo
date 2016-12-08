@@ -7,26 +7,44 @@ import javax.persistence.Embeddable;
  */
 @Embeddable
 public class Address {
-    private String street;
-    private String thana;
+
+    private String homeAddress;
+    private String streetOrVillage;
+    private String unionOrWard;
+    private String upazila;
     private String district;
-    private int postCode;
     private String division;
 
-    public String getStreet() {
-        return street;
+    public String getHomeAddress() {
+        return homeAddress;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+    public void setHomeAddress(String homeAddress) {
+        this.homeAddress = homeAddress;
     }
 
-    public String getThana() {
-        return thana;
+    public String getStreetOrVillage() {
+        return streetOrVillage;
     }
 
-    public void setThana(String thana) {
-        this.thana = thana;
+    public void setStreetOrVillage(String streetOrVillage) {
+        this.streetOrVillage = streetOrVillage;
+    }
+
+    public String getUnionOrWard() {
+        return unionOrWard;
+    }
+
+    public void setUnionOrWard(String unionOrWard) {
+        this.unionOrWard = unionOrWard;
+    }
+
+    public String getUpazila() {
+        return upazila;
+    }
+
+    public void setUpazila(String upazila) {
+        this.upazila = upazila;
     }
 
     public String getDistrict() {
@@ -35,14 +53,6 @@ public class Address {
 
     public void setDistrict(String district) {
         this.district = district;
-    }
-
-    public int getPostCode() {
-        return postCode;
-    }
-
-    public void setPostCode(int postCode) {
-        this.postCode = postCode;
     }
 
     public String getDivision() {
@@ -56,10 +66,11 @@ public class Address {
     @Override
     public String toString() {
         return "Address{" +
-                "street='" + street + '\'' +
-                ", thana='" + thana + '\'' +
+                "homeAddress='" + homeAddress + '\'' +
+                ", streetOrVillage='" + streetOrVillage + '\'' +
+                ", unionOrWard='" + unionOrWard + '\'' +
+                ", upazila='" + upazila + '\'' +
                 ", district='" + district + '\'' +
-                ", postCode=" + postCode +
                 ", division='" + division + '\'' +
                 '}';
     }

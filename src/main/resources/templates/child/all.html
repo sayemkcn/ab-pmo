@@ -96,10 +96,11 @@
                         <span th:text="${child.getParent()?.getName()}"></span>
                     </td>
                     <td>
-                        <span th:text="${child.getParent()?.getAddress()?.getStreet()}"></span>,
-                        <span th:text="${child.getParent()?.getAddress()?.getThana()}"></span>,
-                        <span th:text="${child.getParent()?.getAddress()?.getDistrict()}"></span>,
-                        <span th:text="${child.getParent()?.getAddress()?.getDivision()}"></span>
+                        <span th:text="${child.getParent()?.getAddress()?.getHomeAddress()}"></span>,
+                        <span th:text="${child.getParent()?.getAddress()?.getStreetOrVillage()}"></span>,
+                        <span th:text="${child.getParent()?.getAddress()?.getUnionOrWard()}"></span>,
+                        <span th:text="${child.getParent()?.getAddress()?.getUpazila()}"></span>
+                        <span th:text="${child.getParent()?.getAddress()?.getDistrict()}"></span>
                     </td>
                     <td>
                         <span th:text="${child.getParent()?.getPhoneNumber()}"></span>
