@@ -8,7 +8,7 @@ import java.util.Arrays;
  */
 @Entity
 public class Question extends BaseEntity {
-    private String name;
+    private String title;
     @Column(unique = true)
     private int questionId;
     @Column(length = 10000000)
@@ -19,12 +19,12 @@ public class Question extends BaseEntity {
     private boolean autismDetectedForPositiveText;
     private boolean critical;
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getQuestionId() {
@@ -78,7 +78,7 @@ public class Question extends BaseEntity {
     @Override
     public String toString() {
         return "Question{" +
-                "name='" + name + '\'' +
+                "title='" + title + '\'' +
                 ", questionId=" + questionId +
                 ", file=" + Arrays.toString(file) +
                 ", positiveText='" + positiveText + '\'' +
