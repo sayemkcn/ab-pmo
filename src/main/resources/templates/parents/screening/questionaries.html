@@ -261,7 +261,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="col-sm-5">
                         <form th:action="@{/child/screening/{userId}(userResponse=false,userId=${question?.getQuestionId()})}"
                               method="post">
-                            <button class="btn" style="background: #880E4F;color: white; padding-left: 100px; padding-right: 100px;"
+                            <button class="btn"
+                                    style="background: #880E4F;color: white; padding-left: 100px; padding-right: 100px;"
 
                                     type="submit"><span th:text="${question?.getNegativeText()}"></span></button>
                         </form>
@@ -269,7 +270,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="col-sm-5 col-sm-offset-2">
                         <form th:action="@{/child/screening/{userId}(userResponse=true,userId=${question?.getQuestionId()})}"
                               method="post">
-                            <button class="btn" style="background: #880E4F; color: white; padding-left: 100px; padding-right: 100px;"
+                            <button class="btn"
+                                    style="background: #880E4F; color: white; padding-left: 100px; padding-right: 100px;"
                                     type="submit"><span th:text="${question?.getPositiveText()}"></span></button>
                         </form>
                     </div>
@@ -288,11 +290,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <tbody>
                 <tr th:each="response : ${session.responseList}">
                     <td>
-                        <a th:href="@{/child/screening/} + ${response.getQuestionId()}">
-                            <span th:text="${response.getQuestionId()}"></span>
-                        </a>
+                        <b>
+                            <a th:href="@{/child/screening/} + ${response.getQuestionId()}">
+                                <span th:text="${response.getQuestionId()}"></span>
+                            </a>
+                        </b>
                     </td>
-                    <td th:text="${response.isUserResponse() ? 'Yes' : 'No'}"></td>
+                    <td>
+                        <b>
+                            <span th:text="${response.isUserResponse() ? 'Yes' : 'No'}"></span>
+                        </b>
+                    </td>
                 </tr>
                 </tbody>
             </table>
