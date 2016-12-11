@@ -30,9 +30,13 @@ public class ChildRestController {
     }
 
     @CrossOrigin
-    @RequestMapping(value="/api/parent", method = RequestMethod.POST)
-    public void addParent(@RequestBody Parent parent){
-        parentService.saveParent(parent);
+    @RequestMapping(value="/api/parent/submit", method = RequestMethod.POST)
+    public String addParent(@RequestBody Parent parent){
+        System.out.println("Requested");
+        Parent parentForId = parentService.saveParent(parent);
+        String parentId = String.valueOf(parentForId.getId());
+        System.out.println("Parent ID: "+parentId);
+        return parentId;
     }
 
     @CrossOrigin
@@ -42,10 +46,22 @@ public class ChildRestController {
         System.out.println("Child Name: "+child.getName());
         Parent parent = parentService.getParentById(child.getParent().getId());
         System.out.println("Parent Name: "+parent.getName());
+        child.setParent(parent);
+        boolean isAutism = childService.isAutismDetected(child);
+        child.setAppResult(isAutism);
+        child.setSentFromMobileApp(true);
 
-        childService.saveChild(child);
 
-        return "Autism";
+        if (isAutism) {
+            child.setAppResult(true);
+            childService.saveChild(child);
+            return "Autism";
+        } else {
+            child.setAppResult(false);
+            childService.saveChild(child);
+            return "Not Autism";
+        }
+
 
     }
 }
