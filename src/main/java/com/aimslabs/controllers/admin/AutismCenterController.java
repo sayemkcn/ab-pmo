@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/admin/center")
 public class AutismCenterController {
 
-    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public String centerHome() {
         return "autism_center/center_home";
     }
