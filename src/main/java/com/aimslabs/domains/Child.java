@@ -112,8 +112,6 @@ public class Child extends BaseEntity {
                 ", doctorNote='" + doctorNote + '\'' +
                 ", doctorResult=" + doctorResult +
                 ", sentFromMobileApp=" + sentFromMobileApp +
-                ", responseList=" + responseList +
-                ", parent=" + parent +
                 '}';
     }
 }

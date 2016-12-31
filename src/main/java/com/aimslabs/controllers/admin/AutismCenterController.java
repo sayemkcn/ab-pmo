@@ -1,6 +1,9 @@
 package com.aimslabs.controllers.admin;
 
+import com.aimslabs.services.ChildService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -11,18 +14,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/admin/center")
 public class AutismCenterController {
 
+    @Autowired
+    private ChildService childService;
+
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String centerHome() {
         return "autism_center/center_home";
     }
 
     @RequestMapping(value = "/responses", method = RequestMethod.GET)
-    public String newResponsesFromOnlineScreening() {
+    public String newResponsesFromOnlineScreening(Model model) {
+        model.addAttribute("childList",this.childService.getAllPendingChildList(0,10));
+        System.out.println(this.childService.getAllPendingChildList(0,10).toString());
         return "autism_center/center_responses";
     }
 
-    @RequestMapping(value = "/child", method = RequestMethod.GET)
-    public String showChildStatus() {
-        return "autism_center/center_child";
-    }
+
 }

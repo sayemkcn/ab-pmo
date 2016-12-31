@@ -40,6 +40,13 @@ public class ChildController {
         model.addAttribute("childList", parent.getChildList());
         return "child/all";
     }
+    // single child info
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String showChildStatus(@PathVariable("id") Long id,Model model) {
+        model.addAttribute("child",this.childService.getById(id));
+        System.out.println(this.childService.getById(id));
+        return "child/single_child";
+    }
 
     // -------SCREENING ------ //
     @RequestMapping(value = "/screening/start", method = RequestMethod.GET)

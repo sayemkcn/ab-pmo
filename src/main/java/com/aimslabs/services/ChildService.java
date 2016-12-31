@@ -13,6 +13,9 @@ public interface ChildService {
 
     Child saveChild(Child child);
 
+    Child getById(Long id);
+
     boolean isAutismDetected(Child child);
 
+    List<Child> getAllPendingChildList(int page,int size);
 }

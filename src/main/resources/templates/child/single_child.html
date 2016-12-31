@@ -183,26 +183,48 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     </div>
 
     <div class="container" style="padding: 20px;">
-        <div class="row" id="my-row">
+        <div class="row" id="my-row" th:if="${child != null}">
             <div style="padding:15px;" class="col-sm-6 panel panel-default">
                 <h3>Child Information</h3><br/><br/>
 
-                                    <h4>Child Name: Child Name</h4> <br/>
+                <h4>
+                    Child Name: <span th:text="${child.getName()}">Child Name</span>
+                </h4> <br/>
 
-                                    <h4>Child Age: 23 Months</h4><br/>
+                <h4>
+                    Child Age: <span th:text="${child.getAge()}">23 Months</span>
+                </h4><br/>
 
-                                    <h4>Parent Name: MD Hosen Ahmed</h4><br/>
+                <h4>
+                    Parent Name: <span th:text="${child.getParent()?.getName()}">MD Hosen Ahmed</span>
+                </h4><br/>
 
-                                    <h4>Contact Number: 01923734234</h4><br/>
+                <h4>
+                    Contact Number: <span th:text="${child.getParent()?.getPhoneNumber()}">01923734234</span>
+                </h4><br/>
 
-                                    <h4>Address: Dhaka</h4><br/><br/>
+                <h4>
+                    <span th:text="${child.getParent()?.getAddress()?.getHomeAddress()}"></span>,
+                    <span th:text="${child.getParent()?.getAddress()?.getStreetOrVillage()}"></span>,
+                    <span th:text="${child.getParent()?.getAddress()?.getUnionOrWard()}"></span>,
+                    <span th:text="${child.getParent()?.getAddress()?.getUpazila()}"></span>
+                    <span th:text="${child.getParent()?.getAddress()?.getDistrict()}"></span>
+                </h4><br/><br/>
 
             </div>
             <div class="col-sm-1"></div>
             <div style="padding:15px;" class="col-sm-5 panel panel-default">
                 <h3>Online Screening Result</h3><br/>
-                <h4>Online Result: May Be Autism</h4><br/>
-                <h4>Online Screening Method: Mobile Application</h4> <br/>
+                <h4>
+                    Online Result:
+                    <span th:if="${child.isAppResult()}">May Be Autism</span>
+                    <span th:if="${!child.isAppResult()}">May Be Safe</span>
+                </h4><br/>
+                <h4>
+                    Online Screening Method:
+                    <span th:if="${child.isSentFromMobileApp()}">Mobile Application</span>
+                    <span th:if="${!child.isSentFromMobileApp()}">Web Application</span>
+                </h4> <br/>
                 <button class="btn btn-primary" type="button">See MCHAT Results</button>
             </div>
         </div>
