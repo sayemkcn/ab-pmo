@@ -243,50 +243,64 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     </div>
 
     <div class="container" style="padding: 20px;">
-        <div class="services" id="service">
-            <div class="container">
-                <h5 class="sub-h">Autism Center</h5>
-                <h3 class="tittle">Dhaka Autism Center</h3>
-                <div class="serve-grids-top">
 
-                    <div class="col-md-3 service-box hvr-float-shadow">
-                        <div class=" hi-icon-effect-6">
-                            <!--<img src="images/a2i.png"/>-->
-                            <!-- 						   <a href="#set-6" class="hi-icon glyphicon glyphicon-cog"></a>
-                             -->					     </div>
-
-                        <a th:href="@{/admin/center/responses}"><span><h5>New Responses</h5></span></a>
-                        <p>Online Autism Screening Responses</p>
-                    </div>
-                    <!--w3layouts-->
-                    <!--agileits-->
-                    <div class="col-md-3 service-box hvr-float-shadow">
-                        <div class=" hi-icon-effect-6">
-                            <!--<img src="images/aimslab.png"/>-->
-                            <!-- 						<a href="#set-6" class="hi-icon glyphicon glyphicon-star-empty"></a>
-                             -->					</div>
-                        <a th:href="@{/admin/center/visited}"><h5>Visited Child List</h5></a>
-                        <p>Child Came to the Autism Center.</p>
-                    </div>
-                </div>
-                <div class="col-md-3 service-box hvr-float-shadow">
-                    <div class=" hi-icon-effect-6">
-                        <!--<img src="images/jpuf.png"/>-->
-                        <!-- 						<a href="#set-6" class="hi-icon glyphicon glyphicon-leaf"></a>
-                         -->					</div>
-                    <h5>Account Setting</h5>
-                    <p>Account Related Settings</p>
-                </div>
-                <div class="col-md-3 service-box hvr-float-shadow">
-                    <div class=" hi-icon-effect-6">
-                        <!--<img src="images/bsmmu.png"/>-->
-                        <!-- 						<a href="#set-6" class="hi-icon glyphicon glyphicon-gift"></a>
-                         -->					</div>
-                    <h5>Help</h5>
-                    <p>Contact List, Important Information</p>
-                </div>
-                <div class="clearfix"> </div>
-            </div>
+        <div class="col-sm-12">
+            <h3>Online Autism Screening Responses</h3><br/>
+            <table class="table table-hover table-striped table-bordered">
+                <thead>
+                <tr class="info">
+                    <th>ID</th>
+                    <th>Child Name</th>
+                    <th>Age</th>
+                    <th>Parents Name</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>App Result</th>
+                    <th>Final Result</th>
+                    <th>Screening Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${childList != null}" th:each="child : ${childList}"
+                    th:classappend="${child?.isAppResult()} ? danger : success">
+                    <td>
+                        <span th:text="${child.getId()}"></span>
+                    </td>
+                    <td>
+                        <a th:href="@{/admin/center/child/} + ${child.getId()}">
+                            <span th:text="${child.getName()}"></span>
+                        </a>
+                    </td>
+                    <td>
+                        <span th:text="${child.getAge()}"></span>
+                        <span> Months</span>
+                    </td>
+                    <td>
+                        <span th:text="${child.getParent()?.getName()}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${child.getParent()?.getAddress()?.getHomeAddress()}"></span>,
+                        <span th:text="${child.getParent()?.getAddress()?.getStreetOrVillage()}"></span>,
+                        <span th:text="${child.getParent()?.getAddress()?.getUnionOrWard()}"></span>,
+                        <span th:text="${child.getParent()?.getAddress()?.getUpazila()}"></span>
+                        <span th:text="${child.getParent()?.getAddress()?.getDistrict()}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${child.getParent()?.getPhoneNumber()}"></span>
+                    </td>
+                    <td>
+                        <span th:if="${child.isAppResult()}">Positive</span>
+                        <span th:if="${!child.isAppResult()}">Negative</span>
+                    </td>
+                    <td>
+                        <span>Pending..</span>
+                    </td>
+                    <td>
+                        <span th:text="${child.getCreated()}"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

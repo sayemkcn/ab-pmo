@@ -50,4 +50,10 @@ public class AutismCenterController {
         }
         return "redirect:/admin/center/child/" + id;
     }
+
+    @RequestMapping(value = "/visited",method = RequestMethod.GET)
+    public String visitedChildList(Model model){
+        model.addAttribute("childList",this.childService.getAllChildPaginated(0,10));
+        return "autism_center/center_visited";
+    }
 }
