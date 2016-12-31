@@ -293,7 +293,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <span th:if="${!child.isAppResult()}">Negative</span>
                     </td>
                     <td>
-                        <span>Pending..</span>
+                        <span th:if="${child.isDoctorResult()}">Positive</span>
+                        <span th:if="${!child.isDoctorResult() and child.getLastUpdated() != null}">Negative</span>
+                        <span th:if="${!child.isDoctorResult() and child.getLastUpdated() == null}">Pending..</span>
                     </td>
                     <td>
                         <span th:text="${child.getCreated()}"></span>
