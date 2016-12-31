@@ -185,22 +185,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <div class="container" style="padding: 20px;">
         <div class="row" id="my-row" th:if="${child != null}">
             <div style="padding:15px;" class="col-sm-6 panel panel-default">
-                <h3>Child Information</h3><br/><br/>
+                <h3>শিশুর তথ্য</h3><br/><br/>
 
                 <h4>
-                    Child Name: <span th:text="${child.getName()}">Child Name</span>
+                    শিশুর নাম: <span th:text="${child.getName()}">Child Name</span>
                 </h4> <br/>
 
                 <h4>
-                    Child Age: <span th:text="${child.getAge()}">23 Months</span>
+                    শিশুর বয়স: <span th:text="${child.getAge()}">23 Months</span> মাস
                 </h4><br/>
 
                 <h4>
-                    Parent Name: <span th:text="${child.getParent()?.getName()}">MD Hosen Ahmed</span>
+                    পিতা/মাতার নাম: <span th:text="${child.getParent()?.getName()}">MD Hosen Ahmed</span>
                 </h4><br/>
 
                 <h4>
-                    Contact Number: <span th:text="${child.getParent()?.getPhoneNumber()}">01923734234</span>
+                    ফোন নম্বর: <span th:text="${child.getParent()?.getPhoneNumber()}">01923734234</span>
                 </h4><br/>
 
                 <h4>
@@ -214,14 +214,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </div>
             <div class="col-sm-1"></div>
             <div style="padding:15px;" class="col-sm-5 panel panel-default">
-                <h3>Online Screening Result</h3><br/>
+                <h3>অনলাইন স্ক্রিনিং</h3><br/>
                 <h4>
-                    Online Result:
-                    <span th:if="${child.isAppResult()}">May Be Autism</span>
-                    <span th:if="${!child.isAppResult()}">May Be Safe</span>
+                    অনলাইন স্ক্রিনিং ফলাফল:
+                    <span th:if="${child.isAppResult()}">অটিজম হতে পারে</span>
+                    <span th:if="${!child.isAppResult()}">মনে হচ্ছে নিরাপদ</span>
                 </h4><br/>
                 <h4>
-                    Online Screening Method:
+                    অনলাইন স্ক্রিনিং মেথড:
                     <span th:if="${child.isSentFromMobileApp()}">Mobile Application</span>
                     <span th:if="${!child.isSentFromMobileApp()}">Web Application</span>
                 </h4> <br/>
@@ -234,23 +234,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="news-section" id="news">
     <div class="container" style="padding: 20px;">
         <div class="row">
-            <h3>Final Report by Autism Center</h3>
+            <h3>অটিজম সেন্টারের ফাইনাল রিপোর্ট</h3>
             <form class="form" method="post" enctype="multipart/form-data" th:if="${child != null}"
                   th:action="@{/admin/center/child/}+${child.getId()}">
                 <div class="col-sm-6">
                     <div  id="doctorResult" style="padding-top: 10px;">
-                        <input type="radio" name="doctorResult" value="pending" th:checked="${child.getLastUpdated()==null}">Pending..</input>
-                        <input type="radio" name="doctorResult" value="true" th:checked="${child.isDoctorResult()}">Autism Positive</input>
-                        <input type="radio" name="doctorResult" value="false" th:checked="${!child.isDoctorResult() and child.getLastUpdated() != null}">Autism Negative</input>
+                        <input type="radio" name="doctorResult" value="pending" th:checked="${child.getLastUpdated()==null}">অপেক্ষারত..</input>
+                        <input type="radio" name="doctorResult" value="true" th:checked="${child.isDoctorResult()}">অটিজম পজিটিভ</input>
+                        <input type="radio" name="doctorResult" value="false" th:checked="${!child.isDoctorResult() and child.getLastUpdated() != null}">অটিজম নেগেটিভ</input>
                         <!--<input type="radio" name="doctorResult" value="other" th:checked="${!child.getDoctorNote().isEmpty() and !child.isDoctorResult()}">Other</input>-->
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label class="label label-primary" for="doctorNote">Report Details:</label>
+                        <label class="label label-primary" for="doctorNote">ডাক্তারের নোট:</label>
                         <textarea class="form-control" rows="9" id="doctorNote" name="doctorNote" th:text="${child.getDoctorNote()}"></textarea>
                     </div>
-                    <button class="btn btn-primary" type="submit">Submit Report</button>
+                    <button class="btn btn-primary" type="submit">রিপোর্ট সাবমিট করুন</button>
                 </div>
             </form>
         </div>
