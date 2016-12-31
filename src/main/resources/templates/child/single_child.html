@@ -230,32 +230,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </div>
     </div>
 </div>
-
-<div class="news-section" id="news">
-    <div class="container" style="padding: 20px;">
-        <div class="row">
-            <h3>Final Report by Autism Center</h3>
-            <form class="form" method="post" enctype="multipart/form-data" th:if="${child != null}"
-                  th:action="@{/admin/center/child/}+${child.getId()}">
-                <div class="col-sm-6">
-                    <div  id="doctorResult" style="padding-top: 10px;">
-                        <input type="radio" name="doctorResult" value="pending" th:checked="${child.getLastUpdated()==null}">Pending..</input>
-                        <input type="radio" name="doctorResult" value="true" th:checked="${child.isDoctorResult()}">Autism Positive</input>
-                        <input type="radio" name="doctorResult" value="false" th:checked="${!child.isDoctorResult() and child.getLastUpdated() != null}">Autism Negative</input>
-                        <!--<input type="radio" name="doctorResult" value="other" th:checked="${!child.getDoctorNote().isEmpty() and !child.isDoctorResult()}">Other</input>-->
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label class="label label-primary" for="doctorNote">Report Details:</label>
-                        <textarea class="form-control" rows="9" id="doctorNote" name="doctorNote" th:text="${child.getDoctorNote()}"></textarea>
-                    </div>
-                    <button class="btn btn-primary" type="submit">Submit Report</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 <!-- //about-type-grid -->
 
 
