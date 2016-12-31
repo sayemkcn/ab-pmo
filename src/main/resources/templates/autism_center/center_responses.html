@@ -245,24 +245,24 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <div class="container" style="padding: 20px;">
 
         <div class="col-sm-12">
-            <h3>Online Autism Screening Responses</h3><br/>
+            <h3>অনলাইন স্ক্রিনিং রেসপন্স</h3><br/>
             <table class="table table-hover table-striped table-bordered">
                 <thead>
                 <tr class="info">
-                    <th>ID</th>
-                    <th>Child Name</th>
-                    <th>Age</th>
-                    <th>Parents Name</th>
-                    <th>Address</th>
-                    <th>Phone</th>
-                    <th>App Result</th>
-                    <th>Final Result</th>
-                    <th>Screening Date</th>
+                    <th>আইডি</th>
+                    <th>শিশুর নাম</th>
+                    <th>বয়স</th>
+                    <th>পিতা/মাতার নাম</th>
+                    <th>ঠিকানা</th>
+                    <th>ফোন নম্বর</th>
+                    <th>অ্যাপের ফলাফল</th>
+                    <th>ডাক্তারের সিদ্ধান্ত</th>
+                    <th>স্ক্রিনিং এর তারিখ</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:if="${childList != null}" th:each="child : ${childList}"
-                    th:classappend="${child?.isAppResult()} ? danger : success">
+                    th:classappend="${child?.isDoctorResult() and child?.getLastUpdated() != null} ? danger : success">
                     <td>
                         <span th:text="${child.getId()}"></span>
                     </td>
@@ -289,11 +289,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <span th:text="${child.getParent()?.getPhoneNumber()}"></span>
                     </td>
                     <td>
-                        <span th:if="${child.isAppResult()}">Positive</span>
-                        <span th:if="${!child.isAppResult()}">Negative</span>
+                        <span th:if="${child.isAppResult()}">পজিটিভ</span>
+                        <span th:if="${!child.isAppResult()}">নেগেটিভ</span>
                     </td>
                     <td>
-                        <span>Pending..</span>
+                        <span>অপেক্ষারত..</span>
                     </td>
                     <td>
                         <span th:text="${child.getCreated()}"></span>
