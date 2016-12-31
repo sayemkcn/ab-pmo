@@ -4777,6 +4777,11 @@ a.label:focus {
 .label-primary {
   background-color: #880E4F;
 }
+.label-classic {
+  background-color: #880E4F;
+  font-size: 14px;
+}
+
 .label-primary[href]:hover,
 .label-primary[href]:focus {
   background-color: #286090;

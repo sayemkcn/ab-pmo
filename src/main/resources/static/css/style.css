@@ -9,6 +9,16 @@ body {
   font-family: 'Roboto', sans-serif;
   background: #fff;
 }
+
+ #my-row {
+     display: table;
+ }
+
+ #my-row .panel {
+     float: none;
+     display: table-cell;
+     vertical-align: top;
+ }
 body a{
   transition: 0.5s all ease;
   -webkit-transition: 0.5s all ease;

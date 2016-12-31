@@ -3,12 +3,12 @@ package com.aimslabs.services;
 import com.aimslabs.domains.Child;
 import com.aimslabs.domains.Question;
 import com.aimslabs.domains.QuestionResponse;
+import com.aimslabs.repositories.ChildRepository;
 import com.aimslabs.repositories.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -57,5 +57,17 @@ public class ChildServiceImpl implements ChildService {
         }
         System.out.println("MATCH: " + matches + "\nCRUTIAL MATCHES: " + crutialMatches);
         return crutialMatches >= 2 || matches >= 3;
+    }
+
+    @Override
+    public List<Child> getAllPendingChildList(int page, int size) {
+        Page<Child> childPage = this.childRepo.findAllPristine(new PageRequest(page, size, Sort.Direction.DESC, FIELD_NAME));
+//        List<Child> childList = childPage.getContent();
+        return childPage.getContent();
+    }
+
+    @Override
+    public Child getById(Long id) {
+        return this.childRepo.getOne(id);
     }
 }
