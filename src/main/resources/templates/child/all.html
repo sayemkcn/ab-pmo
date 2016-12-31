@@ -260,12 +260,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:if="${childList != null}" th:each="child : ${childList}" th:classappend="${child?.isAppResult()} ? danger : success">
+                    <tr th:if="${childList != null}" th:each="child : ${childList}"
+                        th:classappend="${child?.isAppResult()} ? danger : success">
                         <td>
                             <span th:text="${child.getId()}"></span>
                         </td>
                         <td>
-                            <span th:text="${child.getName()}"></span>
+                            <a th:href="@{/child/} + ${child.getId()}">
+                                <span th:text="${child.getName()}"></span>
+                            </a>
                         </td>
                         <td>
                             <span th:text="${child.getAge()}"></span>
@@ -289,7 +292,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <span th:if="${!child.isAppResult()}">Negative</span>
                         </td>
                         <td>
-                            <span>Pending..</span>
+                            <span th:if="${child.isDoctorResult()}">Positive</span>
+                            <span th:if="${!child.isDoctorResult() and child.getLastUpdated() != null}">Negative</span>
+                            <span th:if="${!child.isDoctorResult() and child.getLastUpdated() == null}">Pending..</span>
                         </td>
                         <td>
                             <span th:text="${child.getCreated()}"></span>
