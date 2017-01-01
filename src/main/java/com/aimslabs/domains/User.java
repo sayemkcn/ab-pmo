@@ -23,6 +23,8 @@ public class User extends BaseEntity {
     private String password;
     @ElementCollection(fetch = FetchType.EAGER)
     private Collection<String> roles;
+    @Column(unique = true,nullable = false)
+    @NotNull
     private String phoneNumber;
 
     public String getName() {

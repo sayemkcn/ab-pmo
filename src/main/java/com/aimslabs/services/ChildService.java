@@ -18,4 +18,6 @@ public interface ChildService {
     boolean isAutismDetected(Child child);
 
     List<Child> getAllPendingChildList(int page,int size);
+
+    List<Child> getAllVisitedChildList(int page,int size);
 }

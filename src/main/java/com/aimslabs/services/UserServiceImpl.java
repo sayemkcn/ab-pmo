@@ -29,4 +29,9 @@ public class UserServiceImpl implements UserService {
         return this.userRepo.findByEmail(email);
     }
 
+    @Override
+    public User getUserByPhone(String phoneNumber) {
+        return this.userRepo.findByPhoneNumber(phoneNumber);
+    }
+
 }
