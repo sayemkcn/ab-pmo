@@ -59,12 +59,12 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@RequestParam("email") String email,
+    public String login(@RequestParam("phoneNumber") String phoneNumber,
                         @RequestParam("password") String password, Model model,
                         HttpSession session) {
-        User user = this.userService.getUserByEmail(email);
+        User user = this.userService.getUserByPhone(phoneNumber);
         if (user == null) {
-            model.addAttribute("email", email);
+            model.addAttribute("phoneNumber", phoneNumber);
             return "login";
         }
         if (!user.getPassword().equals(password)) {

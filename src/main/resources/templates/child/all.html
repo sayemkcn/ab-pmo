@@ -125,6 +125,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <li><a th:href="@{/admin/questions/create}">Create Question</a></li>
                             </ul>
                         </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/admin/center/home}">Autism Center
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a th:href="@{/admin/center/home}">Home</a></li>
+                                <li><a th:href="@{/admin/center/responses}">New Responses</a></li>
+                                <li><a th:href="@{/admin/center/visited}">Visited Child List</a></li>
+                                <li><a th:href="@{/admin/center/Setting}">Account Setting</a></li>
+                                <li><a th:href="@{/admin/center/help}">Help</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div> <!--NAVIGATION-->
             </div>
@@ -261,7 +272,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </thead>
                     <tbody>
                     <tr th:if="${childList != null}" th:each="child : ${childList}"
-                        th:classappend="${child?.isAppResult()} ? danger : success">
+                        th:classappend="${child?.getLastUpdated() != null and child?.isDoctorResult()} ? danger : success">
                         <td>
                             <span th:text="${child.getId()}"></span>
                         </td>
