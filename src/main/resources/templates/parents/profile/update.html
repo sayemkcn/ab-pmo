@@ -99,6 +99,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="container">
             <div class="logo"><a href="index.html" th:href="@{/}"><h1>Autism<span>Barta</span></h1>
                 <p class="top-para">Autism Community in Bangladesh.</p></a></div>
+            <div class="main-nav">
+                <span class="menu"></span>
             <div class="top-menu">
                 <ul class="nav navbar-nav">
                     <li><a th:href="@{/}">হোম</a></li>
@@ -135,7 +137,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </ul>
             </div> <!--NAVIGATION-->
             </div>
-            <!-- script-for-menu -->
+        <!-- script-for-menu -->
             <script>
                 $("span.menu").click(function () {
                     $(".top-menu").slideToggle("slow", function () {

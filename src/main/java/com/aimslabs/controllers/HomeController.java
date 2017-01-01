@@ -29,7 +29,8 @@ public class HomeController {
     private UserService userService;
 
     @RequestMapping(value = "/dashboard",method = RequestMethod.GET)
-    public String dashboard(){
+    public String dashboard()
+    {
         return "parents/dashboard";
     }
 
