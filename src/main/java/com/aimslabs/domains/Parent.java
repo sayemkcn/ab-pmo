@@ -13,6 +13,7 @@ import java.util.List;
 public class Parent extends BaseEntity {
     private String name;
     private String phoneNumber;
+    private String password;
 
     @Embedded
     private Address address;
@@ -62,6 +63,14 @@ public class Parent extends BaseEntity {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
