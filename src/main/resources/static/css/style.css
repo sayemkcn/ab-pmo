@@ -10,15 +10,26 @@ body {
   background: #fff;
 }
 
- #my-row {
+ #my-row-1 {
      display: table;
  }
 
- #my-row .panel {
+ #my-row-2 {
+     display: table;
+ }
+
+ #my-row-1 .panel {
      float: none;
      display: table-cell;
      vertical-align: top;
  }
+
+ #my-row-2 .panel {
+     float: none;
+     display: table-cell;
+     vertical-align: top;
+ }
+
 body a{
   transition: 0.5s all ease;
   -webkit-transition: 0.5s all ease;
@@ -2575,4 +2586,15 @@ ul.social-icons2{
     margin:10px auto;
   }
 }
+
+ @media only screen and (min-width : 768px) {
+     .is-table-row {
+         display: table;
+     }
+     .is-table-row [class*="col-"] {
+         float: none;
+         display: table-cell;
+         vertical-align: top;
+     }
+ }
 /*--//responsive-design---*/

@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Interactive, community-based screening tool for Autism | Home :: Autism Barta</title>
+    <title>লগ ইন :: অটিজম বার্তা</title>
     <!--mobile apps-->
     <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
@@ -79,17 +79,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="social-icons">
                 <!--IF NOT LOGGED IN-->
                 <!--IF NOT LOGGED IN-->
-                <ul th:if="${session.user == null}">
-                    <li><a th:href="@{/register}" class="account"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
-                    </li>
-                    <li><a th:href="@{/login}" class="account"><span class="glyphicon glyphicon-log-in"></span>
-                        Login</a></li>
+                <ul th:if="${session.user == null}" >
+                    <li><a th:href="@{/register}" class="account"><span class="glyphicon glyphicon-user"></span> রেজিস্ট্রেশন</a></li>
+                    <li><a th:href="@{/login}" class="account"><span class="glyphicon glyphicon-log-in"></span>  লগ ইন </a></li>
                 </ul>
-                <ul th:if="${session.user != null}">
-                    <li><a th:href="@{/profile}" class="account"><span th:text="${session.user.getName()}"></span></a>
-                    </li>
-                    <li><a th:href="@{/logout}" class="account"><span class="glyphicon glyphicon-log-in"></span> Logout</a>
-                    </li>
+                <ul th:if="${session.user != null}" >
+                    <li><a th:href="@{/profile}" class="account"><span th:text="${session.user.getName()}"></span></a></li>
+                    <li><a th:href="@{/logout}" class="account"><span class="glyphicon glyphicon-log-in"></span> লগ আউট</a></li>
                 </ul>
             </div>
             <div class="clearfix"></div>
@@ -97,32 +93,40 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     </div>
     <div class="header-top">
         <div class="container">
-            <div class="logo"><a href="index.html" th:href="@{/}"><h1>Autism<span>Barta</span></h1>
-                <p class="top-para">Autism Community in Bangladesh.</p></a></div>
+            <div class="logo"><a href="index.html" th:href="@{/}"><h1>অটিজম<span>বার্তা</span></h1>
+                <p class="top-para">অটিজম নিরুপন ও পর্যবেক্ষণের কমিউনিটি বেইজড স্ক্রিনিং টুল</p></a></div>
             <div class="main-nav">
                 <span class="menu"></span>
                 <div class="top-menu">
                     <ul class="nav navbar-nav">
-                        <li><a th:href="@{/}">Home</a></li>
-                        <li><a th:href="@{/child/screening/start}">Start Screening</a></li>
+                        <li><a th:href="@{/}">হোম</a></li>
+                        <li><a th:href="@{/child/screening/start}">অটিজম স্ক্রিনিং</a></li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/dashboard}">Dashboard
+                            <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/dashboard}">ড্যাশবোর্ড
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a th:href="@{/dashboard}">Dashboard</a></li>
-                                <li><a th:href="@{/child}">My Childs</a></li>
-                                <li><a th:href="@{/profile}">Profile</a></li>
-                                <li th:if="${session.user != null}"><a th:href="@{/profile/create}">Create Profile</a>
+                                <li><a th:href="@{/dashboard}">ড্যাশবোর্ড</a></li>
+                                <li><a th:href="@{/child}">আমার শিশু</a></li>
+                                <li><a th:href="@{/profile}">প্রোফাইল</a></li>
+                                <li th:if="${session.user != null}"><a th:href="@{/profile/create}">প্রোফাইল তৈরী করুন</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/admin/questions}">Admin
+                            <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/admin/questions}"> অ্যাডমিন
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a th:href="@{/admin/child?page=0}">Child List</a></li>
-                                <li><a th:href="@{/admin/questions}">Questions</a></li>
-                                <li><a th:href="@{/admin/questions/create}">Create Question</a></li>
+                                <li><a th:href="@{/admin/child?page=0}">শিশুদের তথ্য List</a></li>
+                                <li><a th:href="@{/admin/questions}">প্রশ্নাবলী </a></li>
+                                <li><a th:href="@{/admin/questions/create}">প্রশ্ন তৈরি করুন</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/admin/questions}">অটিজম সেন্টার
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a th:href="@{/admin/center/home}">সেন্টার হোম</a></li>
+                                <li><a th:href="@{/admin/center/responses}">রেসপন্স</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -244,10 +248,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
         <div class="row" style="padding-top: 50px; padding-bottom: 100px;">
             <div class="col-sm-6 col-sm-offset-3">
-                <h3>Enter your child informations:</h3>
+                <h3>আপনার শিশুর তথ্য:</h3><br/>
                 <form class="form" th:action="@{/child/screening/start}" method="post">
                     <div class="form-group">
-                        <label class="label label-success" for="name">Child name</label>
+                        <label class="label label-success" for="name">শিশুর নাম</label>
                         <input class="form-control input-lg" type="text" name="name" id="name" placeholder="Child Name" required="true"></input>
                     </div>
                     <!--<div class="form-group">-->
@@ -255,11 +259,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <!--<input class="form-control" type="text" id="age" name="age" placeholder="age"></input>-->
                     <!--</div>-->
                     <div class="form-group">
-                        <label class="label label-success" for="birthDate">Birth Date</label>
+                        <label class="label label-success" for="birthDate">শিশুর জন্মতারিখ</label>
                         <input class="form-control input-lg" type="date" id="birthDate" name="birthDate" required="true"></input>
                     </div>
                     <div class="send">
-                        <input type="submit" value="Start Screening"></input>
+                        <input type="submit" value="অটিজম স্ক্রিনিং করুন"></input>
                     </div>
                 </form>
             </div>
