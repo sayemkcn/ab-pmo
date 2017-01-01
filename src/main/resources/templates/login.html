@@ -102,7 +102,7 @@
                             <ul class="dropdown-menu">
                                 <li><a th:href="@{/dashboard}">ড্যাশবোর্ড</a></li>
                                 <li><a th:href="@{/child}">আমার শিশু</a></li>
-                                <li><a th:href="@{/profile}">প্রোফাইল</a></li>
+                                <!--<li><a th:href="@{/profile}">প্রোফাইল</a></li>-->
                                 <li th:if="${session.user != null}"><a th:href="@{/profile/create}">প্রোফাইল তৈরী করুন</a>
                                 </li>
                             </ul>
@@ -111,7 +111,7 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/admin/questions}"> অ্যাডমিন
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a th:href="@{/admin/child?page=0}">শিশুদের তথ্য List</a></li>
+                                <li><a th:href="@{/admin/child?page=0}">শিশুর তালিকা</a></li>
                                 <li><a th:href="@{/admin/questions}">প্রশ্নাবলী </a></li>
                                 <li><a th:href="@{/admin/questions/create}">প্রশ্ন তৈরি করুন</a></li>
                             </ul>
@@ -121,7 +121,8 @@
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a th:href="@{/admin/center/home}">সেন্টার হোম</a></li>
-                                <li><a th:href="@{/admin/center/responses}">রেসপন্স</a></li>
+                                <li><a th:href="@{/admin/center/responses}">নতুন রেসপন্স</a></li>
+                                <li><a th:href="@{/admin/center/visited}">ভিজিটিকৃত শিশুর তালিকা</a></li>
                             </ul>
                         </li>
                     </ul>
