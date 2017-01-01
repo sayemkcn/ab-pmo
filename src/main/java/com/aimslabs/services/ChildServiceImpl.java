@@ -62,7 +62,12 @@ public class ChildServiceImpl implements ChildService {
     @Override
     public List<Child> getAllPendingChildList(int page, int size) {
         Page<Child> childPage = this.childRepo.findAllPristine(new PageRequest(page, size, Sort.Direction.DESC, FIELD_NAME));
-//        List<Child> childList = childPage.getContent();
+        return childPage.getContent();
+    }
+
+    @Override
+    public List<Child> getAllVisitedChildList(int page, int size) {
+        Page childPage = this.childRepo.findAllDirty(new PageRequest(page,size,Sort.Direction.DESC,FIELD_NAME));
         return childPage.getContent();
     }
 

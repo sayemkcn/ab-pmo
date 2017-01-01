@@ -16,4 +16,6 @@ public interface ChildRepository extends JpaRepository<Child, Long> {
     Page<Child> findAll(Pageable pageable);
     @Query("FROM Child as C WHERE C.lastUpdated IS NULL")
     Page<Child> findAllPristine(Pageable pageable);
+    @Query("FROM Child as C WHERE C.lastUpdated IS NOT NULL")
+    Page<Child> findAllDirty(Pageable pageable);
 }
