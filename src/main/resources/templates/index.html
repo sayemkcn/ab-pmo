@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>অটিজম বার্তা - অটিজম নির্ণয়ের ইন্টারেক্টিভ, কমিউনিটি বেইজড স্ক্রিনিং টুল :: হোম   </title>
+    <title>অটিজম বার্তা :: অটিজম নিরুপন ও পর্যবেক্ষণের কমিউনিটি বেইজড স্ক্রিনিং টুল </title>
     <!--mobile apps-->
     <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
@@ -80,12 +80,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <!--IF NOT LOGGED IN-->
                 <!--IF NOT LOGGED IN-->
                 <ul th:if="${session.user == null}" >
-                    <li><a th:href="@{/register}" class="account"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a th:href="@{/login}" class="account"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <li><a th:href="@{/register}" class="account"><span class="glyphicon glyphicon-user"></span> রেজিস্ট্রেশন</a></li>
+                    <li><a th:href="@{/login}" class="account"><span class="glyphicon glyphicon-log-in"></span>  লগ ইন </a></li>
                 </ul>
                 <ul th:if="${session.user != null}" >
                     <li><a th:href="@{/profile}" class="account"><span th:text="${session.user.getName()}"></span></a></li>
-                    <li><a th:href="@{/logout}" class="account"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                    <li><a th:href="@{/logout}" class="account"><span class="glyphicon glyphicon-log-in"></span> লগ আউট</a></li>
                 </ul>
             </div>
             <div class="clearfix"></div>
@@ -94,42 +94,39 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <div class="header-top">
         <div class="container">
             <div class="logo"><a href="index.html" th:href="@{/}"><h1>অটিজম<span>বার্তা</span></h1>
-                <p class="top-para"> বাংলাদেশের  সর্বথম   অটিজম </p></a></div>
+                <p class="top-para">অটিজম নিরুপন ও পর্যবেক্ষণের কমিউনিটি বেইজড স্ক্রিনিং টুল</p></a></div>
             <div class="main-nav">
                 <span class="menu"></span>
                 <div class="top-menu">
                     <ul class="nav navbar-nav">
-                        <li><a th:href="@{/}">Home</a></li>
-                        <li><a th:href="@{/child/screening/start}">Start Screening</a></li>
+                        <li><a th:href="@{/}">হোম</a></li>
+                        <li><a th:href="@{/child/screening/start}">অটিজম স্ক্রিনিং</a></li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/dashboard}">Dashboard
+                            <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/dashboard}">ড্যাশবোর্ড
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a th:href="@{/dashboard}">Dashboard</a></li>
-                                <li><a th:href="@{/child}">My Childs</a></li>
-                                <li><a th:href="@{/profile}">Profile</a></li>
-                                <li th:if="${session.user != null}"><a th:href="@{/profile/create}">Create Profile</a>
+                                <li><a th:href="@{/dashboard}">ড্যাশবোর্ড</a></li>
+                                <li><a th:href="@{/child}">আমার শিশু</a></li>
+                                <li><a th:href="@{/profile}">প্রোফাইল</a></li>
+                                <li th:if="${session.user != null}"><a th:href="@{/profile/create}">প্রোফাইল তৈরী করুন</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/admin/questions}">Admin
+                            <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/admin/questions}"> অ্যাডমিন
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a th:href="@{/admin/child?page=0}">Child List</a></li>
-                                <li><a th:href="@{/admin/questions}">Questions</a></li>
-                                <li><a th:href="@{/admin/questions/create}">Create Question</a></li>
+                                <li><a th:href="@{/admin/child?page=0}">শিশুদের তথ্য List</a></li>
+                                <li><a th:href="@{/admin/questions}">প্রশ্নাবলী </a></li>
+                                <li><a th:href="@{/admin/questions/create}">প্রশ্ন তৈরি করুন</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/admin/center/home}">Autism Center
+                            <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/admin/questions}">অটিজম সেন্টার
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a th:href="@{/admin/center/home}">Home</a></li>
-                                <li><a th:href="@{/admin/center/responses}">New Responses</a></li>
-                                <li><a th:href="@{/admin/center/visited}">Visited Child List</a></li>
-                                <li><a th:href="@{/admin/center/Setting}">Account Setting</a></li>
-                                <li><a th:href="@{/admin/center/help}">Help</a></li>
+                                <li><a th:href="@{/admin/center/home}">সেন্টার হোম</a></li>
+                                <li><a th:href="@{/admin/center/responses}">রেসপন্স</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -242,113 +239,98 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- //app-->
 <!-- about-type-grid -->
 <div class="about" id="about">
-    <div class="container" style="padding-bottom: 50px;">
+    <div class="container">
         <div class="col-md-5 ab-left">
             <form action="#" th:action="@{/child/screening/start}" method="post" class="retire">
                 <div class="styled-input">
-                    <input type="text" name="name" required="required" style="color: white;" placeholder="Child Name"></input>
-                </div>
+                    <input type="text" name="name" required="required" style="color: white;" placeholder="শিশুর নাম"></input>
+                    <span></span> </div>
                 <div class="styled-input">
-                    <input type="date" name="birthDate" required="required" style="color: white; margin-top: 20px;" placeholder="Date of Birth"></input>
-                    <label>Date of Birth</label>
-                </div>
-                <!--<div class="styled-input">-->
-                    <!--<textarea required="required"></textarea>-->
-                    <!--<label>Your Note (Optional)</label>-->
-                    <!--<span></span></div>-->
+                    <input type="date" name="birthDate" required="required" style="color: white; margin-top: 20px;" placeholder="শিশুর জন্ম তারিখ"></input>
+                    <label>শিশুর জন্ম তারিখ</label>
+                    <span></span> </div>
+                <div class="styled-input">
+                    <input type="text" name="relation" placeholder="শিশুর সাথে আপনার সম্পর্ক" required="required"/>
+                    <span></span> </div><br/>
                 <div class="send">
-                    <input type="submit" value="START AUTISM TEST"></input>
+                    <input type="submit" value="অটিজম স্ক্রিনিং করুন"></input>
                 </div>
             </form>
+
 
         </div>
 
         <div class="col-md-6 ab-right">
-            <div>
-                <h2 class="tittle">Welcome to <span>Autism Barta</span></h2>
-                <h4>GET YOUR RETIREMENT PLAN</h4>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                    laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                    ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem </p>
-                <a href="#" data-toggle="modal" data-target="#myModal1" class="hvr-shutter-in-horizontal">Register</a>
+            <div class="col-bottom two">
+                <h2 class="tittle"> <span>অটিজম  বার্তায়</span> স্বাগতম</h2>
+                <!--   <h4>অটিজম নিরুপন ও পর্যবেক্ষণের কমিউনিটি বেইজড স্ক্রিনিং টুল </h4> -->
+                <p>“অটিজম বার্তা” একটি মোবাইল ভিত্তিক, ইন্টারেক্টিভ, কমিউনিটি বেইজড স্ক্রিনিং টুল যা অটিজম নিরুপন ও পর্যবেক্ষণের কাজে ব্যবহার করা হয়। পিতা-মাতা, চিকিৎসক, স্বাস্থ্যবিষয়ক প্রশিক্ষিত কর্মকর্তাগণ অ্যাপটি ব্যবহার করে  অটিজম স্ক্রিনিং ও পরবর্তি করনীয় বিষয়গুলো জানতে পারবেন। অ্যাপটি দ্বারা পরীক্ষার মাধ্যমে একটি শিশুর অটিজম হওয়ার সম্ভাবনা প্রকাশ পেলে তার খবর নিকটস্থ অটিজম সেন্টারে সয়ংক্রীয়ভাবে অবহিত করা হয়। পাশাপাশি শিশুর অভিভাবককে পরবর্তী করনীয় সম্পর্কে অবহিত করা হয়।  </p>
+                <a href="#" data-toggle="modal" data-target="#myModal1" class="hvr-shutter-in-horizontal">রেজিস্ট্রেশন </a>
                 &nbsp;&nbsp;
-                <a href="#" data-toggle="modal" data-target="#myModal1" class="hvr-shutter-in-horizontal">Log In</a>
+                <a href="#" data-toggle="modal" data-target="#myModal1" class="hvr-shutter-in-horizontal">লগ ইন</a>
             </div>
 
         </div>
 
+        <div class="clearfix"> </div>
+    </div>
+</div>   <!-- //about-type-grid -->
+
+<!--/news-->
+<div class="services" id="service">
+    <div class="container">
+        <h5 class="sub-h">স্বনামধন্য প্রতিষ্ঠানসমূহ দ্বারা পরিচালিত</h5>
+        <h3 class="tittle">সহযোগী প্রতিষ্ঠান</h3>
+        <div class="serve-grids-top">
+
+            <div class="col-md-3 service-box hvr-float-shadow">
+                <div class=" hi-icon-effect-6">
+                    <img src="images/a2i.png"></img>
+                    <!-- 						   <a href="#set-6" class="hi-icon glyphicon glyphicon-cog"></a>
+                     -->                         </div>
+                <h5>a2i</h5>
+                <p>a2i is the world’s first Innovation Lab+ and the key driver from the Prime Minister’s Office.</p>
+            </div>
+            <!--w3layouts-->
+            <!--agileits-->
+            <div class="col-md-3 service-box hvr-float-shadow">
+                <div class=" hi-icon-effect-6">
+                    <img src="images/aimslab.png"></img>
+                    <!-- 						<a href="#set-6" class="hi-icon glyphicon glyphicon-star-empty"></a>
+                     -->                    </div>
+                <h5>AIMS Lab, UIU</h5>
+                <p>Advanced Intelligent Multidisciplinary Systems Lab (AIMS Lab) by United International University.</p>
+            </div>
+        </div>
+        <div class="col-md-3 service-box hvr-float-shadow">
+            <div class=" hi-icon-effect-6">
+                <img src="images/jpuf.png"></img>
+                <!-- 						<a href="#set-6" class="hi-icon glyphicon glyphicon-leaf"></a>
+                 -->                    </div>
+            <h5>JPUF</h5>
+            <p>Jatiyo Protibondhi Unnayan Foundation,Ministry of Social Welfare.</p>
+        </div>
+        <div class="col-md-3 service-box hvr-float-shadow">
+            <div class=" hi-icon-effect-6">
+                <img src="images/bsmmu.png"></img>
+                <!-- 						<a href="#set-6" class="hi-icon glyphicon glyphicon-gift"></a>
+                 -->                    </div>
+            <h5>IPNA BSMMU</h5>
+            <p> Institute of Paediatric Neurodisorder and Autism (IPNA) in Bangabandhu Sheikh Mujib Medical University</p>
+        </div>
         <div class="clearfix"></div>
     </div>
 </div>
-<!-- //about-type-grid -->
 
-<!--/news-->
-<div class="news-section" id="news">
-    <div class="container">
-        <h5 class="sub-h">Happy Moments in Your Life</h5>
-        <h3 class="tittle">News And Events</h3>
-        <div class="news-grids">
-            <div class="col-md-6 news-grid">
-                <div class="col-md-6 news-img">
-                    <img th:src="@{/images/n1.jpg}" title="couple"/>
-                </div>
-                <div class="col-md-6 news-text">
-                    <span class="event-date">Mar 14th <span class="event-year">2016</span></span>
-                    <h4>KERPTMSE QUI NESCIUSES IDOLORES</h4>
-                    <p>Katrsas lasuytasa mauystades Lundg kertaseares lmasetu segiat malesui tyuadede ferteras mise
-                        nlasce doleruytas</p>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div class="col-md-6 news-grid">
-                <div class="col-md-6 news-img">
-                    <img src="images/n2.jpg" title="couple"/>
-                </div>
-                <div class="col-md-6 news-text">
-                    <span class="event-date">Apr 14th <span class="event-year">2016</span></span>
-                    <h4>KERPTMSE QUI NESCIUSES IDOLORES</h4>
-                    <p>Katrsas lasuytasa mauystades Lundg kertaseares lmasetu segiat malesui tyuadede ferteras mise
-                        nlasce doleruytas</p>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div class="col-md-6 news-grid">
-                <div class="col-md-6 news-img">
-                    <img src="images/n4.jpg" title="couple"/>
-                </div>
-                <div class="col-md-6 news-text">
-                    <span class="event-date">Apr 14th <span class="event-year">2016</span></span>
-                    <h4>KERPTMSE QUI NESCIUSES IDOLORES</h4>
-                    <p>Katrsas lasuytasa mauystades Lundg kertaseares lmasetu segiat malesui tyuadede ferteras mise
-                        nlasce doleruytas</p>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div class="col-md-6 news-grid">
-                <div class="col-md-6 news-img">
-                    <img src="images/n3.jpg" title="couple"/>
-                </div>
-                <div class="col-md-6 news-text">
-                    <span class="event-date">Apr 14th <span class="event-year">2016</span></span>
-                    <h4>KERPTMSE QUI NESCIUSES IDOLORES</h4>
-                    <p>Katrsas lasuytasa mauystades Lundg kertaseares lmasetu segiat malesui tyuadede ferteras mise
-                        nlasce doleruytas</p>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-</div>
 <div class="insurance-section" id="plan">
     <div class="container">
-        <h5 class="sub-h">Autism Barta on Android</h5>
-        <h3 class="tittle second">Autism Barta App</h3>
+        <h5 class="sub-h">অটিজম বার্তা এখন অ্যান্ড্রয়েডে</h5>
+        <h3 class="tittle second">অটিজম বার্তা অ্যান্ড্রয়েড অ্যাপলিকেশন</h3>
 
         <div class="insurance-grids grid">
             <div class="col-md-6 insurance-grid">
                 <figure class="effect-julia">
-                    <img src="images/app.png" alt="img21"/>
+                    <img src="images/apphome.png" alt="img21"/>
                     <!-- 	<figcaption>
                             <h4>Lorem ipsum  <span>dolor </span></h4>
                             <div>
@@ -363,7 +345,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </div>
             <div class="col-md-6 insurance-grid">
                 <figure class="effect-julia">
-                    <img src="images/app1.png" alt="img21"/>
+                    <img src="images/appq.png" alt="img21"/>
                     <!-- 		<figcaption>
                                 <h4>Lorem ipsum  <span>dolor </span></h4>
                                 <div>
@@ -378,7 +360,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </div>
             <div class="clearfix"></div>
         </div>
-        <h4>Autism Screening is now on mobile</h4>
+        <!--<h4>Autism Screening is now on mobile</h4>
         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nonummy
             hendrerit mauris. Phasellus porta. Fusce suscipit varius mi. Cum sociis natoque penatibus et magnis dis
             parturient montes, nascetur ridiculus mus. Nulla dui. Maecenas tristique orci ac sem. Duis ultricies
@@ -394,8 +376,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <li><a href="#"><i class="tick"></i></a>Mauris accumsan at leo ut fringilla. In bibendum varius nulla at
                 ornare.
             </li>
-        </ul>
-        <br></br>
+        </ul>-->
+        <br/>
         <img src="images/gplay.png" width="240" height="100"></img>
 
         <!-- 			   	<a href="#" data-toggle="modal" data-target="#myModal1" class="hvr-shutter-in-horizontal">Download on Google Play</a>
@@ -475,50 +457,65 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!--//gallery-->
 
 <!--/news-->
-<div class="services" id="service">
+<!--
+<div class="news-section" id="news">
     <div class="container">
-        <h5 class="sub-h">Collaboration between leading organization</h5>
-        <h3 class="tittle">Partnership</h3>
-        <div class="serve-grids-top">
-
-            <div class="col-md-3 service-box hvr-float-shadow">
-                <div class=" hi-icon-effect-6">
-                    <img src="images/a2i.png"></img>
-                    <!-- 						   <a href="#set-6" class="hi-icon glyphicon glyphicon-cog"></a>
-                     -->                         </div>
-                <h5>a2i</h5>
-                <p>a2i is the world’s first Innovation Lab+ and the key driver from the Prime Minister’s Office.</p>
+        <h5 class="sub-h">Happy Moments in Your Life</h5>
+        <h3 class="tittle">News And Events</h3>
+        <div class="news-grids">
+            <div class="col-md-6 news-grid">
+                <div class="col-md-6 news-img">
+                    <img th:src="@{/images/n1.jpg}" title="couple"/>
+                </div>
+                <div class="col-md-6 news-text">
+                    <span class="event-date">Mar 14th <span class="event-year">2016</span></span>
+                    <h4>KERPTMSE QUI NESCIUSES IDOLORES</h4>
+                    <p>Katrsas lasuytasa mauystades Lundg kertaseares lmasetu segiat malesui tyuadede ferteras mise
+                        nlasce doleruytas</p>
+                </div>
+                <div class="clearfix"></div>
             </div>
-            <!--w3layouts-->
-            <!--agileits-->
-            <div class="col-md-3 service-box hvr-float-shadow">
-                <div class=" hi-icon-effect-6">
-                    <img src="images/aimslab.png"></img>
-                    <!-- 						<a href="#set-6" class="hi-icon glyphicon glyphicon-star-empty"></a>
-                     -->                    </div>
-                <h5>AIMS Lab, UIU</h5>
-                <p>Advanced Intelligent Multidisciplinary Systems Lab (AIMS Lab) by United International University.</p>
+            <div class="col-md-6 news-grid">
+                <div class="col-md-6 news-img">
+                    <img src="images/n2.jpg" title="couple"/>
+                </div>
+                <div class="col-md-6 news-text">
+                    <span class="event-date">Apr 14th <span class="event-year">2016</span></span>
+                    <h4>KERPTMSE QUI NESCIUSES IDOLORES</h4>
+                    <p>Katrsas lasuytasa mauystades Lundg kertaseares lmasetu segiat malesui tyuadede ferteras mise
+                        nlasce doleruytas</p>
+                </div>
+                <div class="clearfix"></div>
             </div>
+            <div class="col-md-6 news-grid">
+                <div class="col-md-6 news-img">
+                    <img src="images/n4.jpg" title="couple"/>
+                </div>
+                <div class="col-md-6 news-text">
+                    <span class="event-date">Apr 14th <span class="event-year">2016</span></span>
+                    <h4>KERPTMSE QUI NESCIUSES IDOLORES</h4>
+                    <p>Katrsas lasuytasa mauystades Lundg kertaseares lmasetu segiat malesui tyuadede ferteras mise
+                        nlasce doleruytas</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="col-md-6 news-grid">
+                <div class="col-md-6 news-img">
+                    <img src="images/n3.jpg" title="couple"/>
+                </div>
+                <div class="col-md-6 news-text">
+                    <span class="event-date">Apr 14th <span class="event-year">2016</span></span>
+                    <h4>KERPTMSE QUI NESCIUSES IDOLORES</h4>
+                    <p>Katrsas lasuytasa mauystades Lundg kertaseares lmasetu segiat malesui tyuadede ferteras mise
+                        nlasce doleruytas</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
         </div>
-        <div class="col-md-3 service-box hvr-float-shadow">
-            <div class=" hi-icon-effect-6">
-                <img src="images/jpuf.png"></img>
-                <!-- 						<a href="#set-6" class="hi-icon glyphicon glyphicon-leaf"></a>
-                 -->                    </div>
-            <h5>JPUF</h5>
-            <p>Jatiyo Protibondhi Unnayan Foundation,Ministry of Social Welfare.</p>
-        </div>
-        <div class="col-md-3 service-box hvr-float-shadow">
-            <div class=" hi-icon-effect-6">
-                <img src="images/bsmmu.png"></img>
-                <!-- 						<a href="#set-6" class="hi-icon glyphicon glyphicon-gift"></a>
-                 -->                    </div>
-            <h5>BSMMU</h5>
-            <p>Bangabandhu Sheikh Mujib Medical University, Postgraduate Medical Institution of the country.</p>
-        </div>
-        <div class="clearfix"></div>
     </div>
 </div>
+-->
 
 <!--/contact-->
 <div id="contact" class="contact">
@@ -572,20 +569,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </div>
             <div class="col-md-4 footer-grid-left">
                 <h3>about us</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-                    <span>But I must explain to you how all this mistaken idea of denouncing
-						pleasure and praising pain was born and I will give you a complete 
-						account of the system, and expound the actual teachings of the 
-						great explorer.</span>
+                <p>“অটিজম বার্তা” একটি মোবাইল ভিত্তিক, ইন্টারেক্টিভ, কমিউনিটি বেইজড স্ক্রিনিং টুল যা অটিজম নিরুপন ও পর্যবেক্ষণের কাজে ব্যবহার করা হয়। পিতা-মাতা, চিকিৎসক, স্বাস্থ্যবিষয়ক প্রশিক্ষিত কর্মকর্তাগণ অ্যাপটি ব্যবহার করে  অটিজম স্ক্রিনিং ও পরবর্তি করনীয় বিষয়গুলো জানতে পারবেন। অ্যাপটি দ্বারা পরীক্ষার মাধ্যমে একটি শিশুর অটিজম হওয়ার সম্ভাবনা প্রকাশ পেলে তার খবর নিকটস্থ অটিজম সেন্টারে সয়ংক্রীয়ভাবে অবহিত করা হয়। পাশাপাশি শিশুর অভিভাবককে পরবর্তী করনীয় সম্পর্কে অবহিত করা হয়।
+                    <span>অ্যাপটির মাধ্যমে শিশুর অবস্থা মনিটর করা ও পরবর্তীতে সময় মত পিতা-মাতাকে মোবাইলে অবহিত করা হয়। পাশাপাশি অটিজম বিষয়ক সামাজিক সচেতনতা ও শিক্ষিত করা “অটিজম বার্তা”র অন্যতম লক্ষ্য।</span>
                 </p>
             </div>
             <div class="clearfix"></div>
         </div>
         <div class="footer-bottom">
             <div class="footer-bottom-left">
-                <p>&copy; 2016 We Plan. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts.</a>
+                <p>&copy; 2016  AIMS Lab, United International University. All rights reserved | Design by <a href="http://agroho.com/">আগ্রহ</a>
                 </p>
             </div>
             <div class="footer-bottom-right">
