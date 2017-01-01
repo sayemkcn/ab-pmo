@@ -103,26 +103,35 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <span class="menu"></span>
                 <div class="top-menu">
                     <ul class="nav navbar-nav">
-                        <li><a th:href="@{/}">Home</a></li>
-                        <li><a th:href="@{/child/screening/start}">Start Screening</a></li>
+                        <li><a th:href="@{/}">হোম</a></li>
+                        <li><a th:href="@{/child/screening/start}">অটিজম স্ক্রিনিং</a></li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/dashboard}">Dashboard
+                            <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/dashboard}">ড্যাশবোর্ড
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a th:href="@{/dashboard}">Dashboard</a></li>
-                                <li><a th:href="@{/child}">My Childs</a></li>
-                                <li><a th:href="@{/profile}">Profile</a></li>
-                                <li th:if="${session.user != null}"><a th:href="@{/profile/create}">Create Profile</a>
+                                <li><a th:href="@{/dashboard}">ড্যাশবোর্ড</a></li>
+                                <li><a th:href="@{/child}">আমার শিশু</a></li>
+                                <!--<li><a th:href="@{/profile}">প্রোফাইল</a></li>-->
+                                <li th:if="${session.user != null}"><a th:href="@{/profile/create}">প্রোফাইল তৈরী করুন</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/admin/questions}">Admin
+                            <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/admin/questions}"> অ্যাডমিন
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a th:href="@{/admin/child?page=0}">Child List</a></li>
-                                <li><a th:href="@{/admin/questions}">Questions</a></li>
-                                <li><a th:href="@{/admin/questions/create}">Create Question</a></li>
+                                <li><a th:href="@{/admin/child?page=0}">শিশুর তালিকা</a></li>
+                                <li><a th:href="@{/admin/questions}">প্রশ্নাবলী </a></li>
+                                <li><a th:href="@{/admin/questions/create}">প্রশ্ন তৈরি করুন</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/admin/questions}">অটিজম সেন্টার
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a th:href="@{/admin/center/home}">সেন্টার হোম</a></li>
+                                <li><a th:href="@{/admin/center/responses}">নতুন রেসপন্স</a></li>
+                                <li><a th:href="@{/admin/center/visited}">ভিজিটিকৃত শিশুর তালিকা</a></li>
                             </ul>
                         </li>
                     </ul>
