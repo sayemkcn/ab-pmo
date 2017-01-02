@@ -258,12 +258,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                   enctype="multipart/form-data">
                 <div class="form-group">
                     <label class="label label-success" for="name">Your name</label>
-                    <input class="form-control" type="text" name="name" id="name"
+                    <input class="form-control" type="text" name="name" id="name" th:if="${session.newUser!=null}" th:value="${session.newUser.getName()}"
                            placeholder="You Name"></input>
                 </div>
                 <div class="form-group">
                     <label class="label label-success" for="phoneNumber">Phone Number</label>
-                    <input class="form-control" type="text" id="phoneNumber" name="phoneNumber"></input>
+                    <input class="form-control" type="text" id="phoneNumber" name="phoneNumber" th:if="${session.newUser!=null}" th:value="${session.newUser.getPhoneNumber()}"></input>
                 </div>
                 <div class="form-group">
                     <h4>Address:</h4>
