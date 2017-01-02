@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashSet;
@@ -41,14 +42,16 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String registerUser(@ModelAttribute User user, BindingResult bindingResult) {
+    public String registerUser(@ModelAttribute User user, BindingResult bindingResult, HttpSession session) {
         if (bindingResult.hasErrors())
             System.out.println(bindingResult.toString());
         Set<String> roles = new HashSet<>();
         roles.add("PARENTS");
         user.setRoles(roles);
-        this.userService.saveUser(user);
-        return "redirect:/login?message=Successfully registered!";
+        session.setAttribute("newUser",user);
+        return "redirect:/profile/create";
+//        this.userService.saveUser(user);
+//        return "redirect:/login?message=Successfully registered!";
     }
 
     // ---- LOGIN ---- //

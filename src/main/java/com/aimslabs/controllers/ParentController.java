@@ -34,14 +34,29 @@ public class ParentController {
                 return "redirect:/profile/update";
             return "parents/profile/create";
         }
+        // check if new user is registering
+        if (session.getAttribute("newUser") != null) {
+            return "parents/profile/create";
+        }
         return "redirect:/login";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createProfile(@ModelAttribute Parent parent, HttpSession session) {
         User loggedInUser = (User) session.getAttribute("user");
-        if (loggedInUser == null)
+        if (loggedInUser == null) {
+            // new user registration
+            User newUser = (User) session.getAttribute("newUser");
+            if (newUser != null) {
+                newUser = this.userService.saveUser(newUser);
+                parent.setUser(newUser);
+                this.parentService.saveParent(parent);
+                session.removeAttribute("newUser");  // remove new user session
+                session.setAttribute("user",newUser); // set user session for auto login for the first time
+                return "redirect:/dashboard?message=Registration Successful. This is your dashboard. You can test if your child has autism by clicking Autism Screening button.";
+            }
             return "redirect:/login";
+        }
         parent.setUser(loggedInUser);
         this.parentService.saveParent(parent);
         return "redirect:/dashboard?message=Successfully created profile.";
@@ -61,7 +76,7 @@ public class ParentController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String updateProfile(@ModelAttribute Parent parent,HttpSession session) {
+    public String updateProfile(@ModelAttribute Parent parent, HttpSession session) {
         User user = (User) session.getAttribute("user");
         // find exiting user to get id of this entity // set it to the new entity so that it doen't create new row instead of updating.
         Parent existingParent = this.parentService.getParentByUser(user);
