@@ -53,6 +53,10 @@ public class ParentController {
                 this.parentService.saveParent(parent);
                 session.removeAttribute("newUser");  // remove new user session
                 session.setAttribute("user",newUser); // set user session for auto login for the first time
+                // check if user already started screening, if yes the start screening again
+                if (session.getAttribute("child") != null)
+                    return "redirect:/child/screening/1";
+                // otherwise open dashboard
                 return "redirect:/dashboard?message=Registration Successful. This is your dashboard. You can test if your child has autism by clicking Autism Screening button.";
             }
             return "redirect:/login";

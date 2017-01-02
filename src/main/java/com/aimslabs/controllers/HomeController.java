@@ -50,8 +50,6 @@ public class HomeController {
         user.setRoles(roles);
         session.setAttribute("newUser",user);
         return "redirect:/profile/create";
-//        this.userService.saveUser(user);
-//        return "redirect:/login?message=Successfully registered!";
     }
 
     // ---- LOGIN ---- //
@@ -76,6 +74,9 @@ public class HomeController {
             return "login";
         }
         session.setAttribute("user", user);
+        // check if user already started screening, if yes the start screening again
+        if (session.getAttribute("child") != null)
+            return "redirect:/child/screening/1";
         return "redirect:/dashboard";
     }
 

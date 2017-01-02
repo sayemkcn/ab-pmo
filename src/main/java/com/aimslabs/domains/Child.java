@@ -103,6 +103,13 @@ public class Child extends BaseEntity {
         return String.valueOf(duration.toDays()/30);
     }
 
+    public boolean isInDanger(){
+        if (this.getLastUpdated()==null)
+            return this.isAppResult();
+        else
+            return this.isDoctorResult();
+    }
+
     @Override
     public String toString() {
         return "Child{" +
