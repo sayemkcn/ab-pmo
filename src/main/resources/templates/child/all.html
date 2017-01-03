@@ -270,7 +270,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </thead>
                     <tbody>
                     <tr th:if="${childList != null}" th:each="child : ${childList}"
-                        th:classappend="${child?.getLastUpdated() != null and child?.isDoctorResult()} ? danger : success">
+                        th:classappend="${child?.isInDanger()} ? danger : success">
                         <td>
                             <span th:text="${child.getId()}"></span>
                         </td>
