@@ -46,7 +46,10 @@ public class HomeController {
         if (bindingResult.hasErrors())
             System.out.println(bindingResult.toString());
         Set<String> roles = new HashSet<>();
-        roles.add("PARENTS");
+        if (user.getPhoneNumber().equals("01710226163") || user.getPhoneNumber().equals("01515667948"))
+            roles.add("ROLE_SUPER_ADMIN");
+        else
+            roles.add("ROLE_PARENTS");
         user.setRoles(roles);
         session.setAttribute("newUser",user);
         return "redirect:/profile/create";
