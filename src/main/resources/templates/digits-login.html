@@ -69,6 +69,18 @@
                     .done(onLogin) /*handle the response*/
                     .fail(onLoginFailure);
         }
+        /* Validate and log use in. */
+        function onLogin(loginResponse){
+            // Send headers to your server and validate user by calling Digits’ API
+            var oAuthHeaders = loginResponse.oauth_echo_headers;
+            var verifyData = {
+                authHeader: oAuthHeaders['X-Verify-Credentials-Authorization'],
+                apiUrl: oAuthHeaders['X-Auth-Service-Provider']
+            };
+
+            $.post('/verify', verifyData)
+                    .done(function(){ window.reload(); });
+        }
     </script>
     <!--//end-smoth-scrolling-->
 </head>
