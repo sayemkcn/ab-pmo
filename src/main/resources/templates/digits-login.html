@@ -56,6 +56,20 @@
             });
         });
     </script>
+    <script id="digits-sdk" src="https://cdn.digits.com/1/sdk.js" async="async"></script>
+    <script>
+        /* Initialize Digits for Web using your application's consumer key that Fabric generated */
+        document.getElementById('digits-sdk').onload = function() {
+            Digits.init({ consumerKey: 'SkqUWNrghQ2FI18lOj8PwxZaP' });
+        };
+
+        /* Launch the Login to Digits flow. */
+        function onLoginButtonClick(event){
+            Digits.logIn()
+                    .done(onLogin) /*handle the response*/
+                    .fail(onLoginFailure);
+        }
+    </script>
     <!--//end-smoth-scrolling-->
 </head>
 
@@ -95,7 +109,7 @@
                         <label class="label label-primary" for="password">পাসওয়ার্ড:</label>
                         <input class="form-control" type="password" id="password" name="password"></input>
                     </div>
-                    <button class="btn btn-primary" type="submit">লগ ইন</button>
+                    <button onclick="onLoginButtonClick(event)" class="btn btn-primary" type="submit">লগ ইন</button>
                     <div>
                         <span>এখনও রেজিস্ট্রেশন করেন নি?</span>
                         <a th:href="@{/register}">রেজিস্ট্রেশন করুন</a>

@@ -3,8 +3,12 @@ package com.aimslabs.services;
 import com.aimslabs.domains.User;
 import com.aimslabs.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by sayemkcn on 11/22/16.
@@ -13,6 +17,11 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepo;
+
+    @Override
+    public List<User> getAllUsers(int page, int size) {
+        return this.userRepo.findAll(new PageRequest(page, size, Sort.Direction.DESC, "id")).getContent();
+    }
 
     @Override
     public User getUser(Long id) {

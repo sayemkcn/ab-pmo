@@ -1,10 +1,8 @@
 package com.aimslabs.controllers;
 
 import com.aimslabs.domains.*;
-import com.aimslabs.services.ChildService;
-import com.aimslabs.services.ParentService;
-import com.aimslabs.services.QuestionResponseService;
-import com.aimslabs.services.QuestionService;
+import com.aimslabs.domains.annotations.CurrentUser;
+import com.aimslabs.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,13 +27,13 @@ public class ChildController {
     private ChildService childService;
     @Autowired
     private ParentService parentService;
+    @Autowired
+    private UserService userService;
 
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String childList(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user == null)
-            return "redirect:/login";
+    public String childList(@CurrentUser User currentUser, Model model) {
+        User user = this.userService.getUserByPhone(currentUser.getPhoneNumber());
         Parent parent = this.parentService.getParentByUser(user);
         model.addAttribute("childList", parent.getChildList());
         return "child/all";
@@ -50,13 +48,7 @@ public class ChildController {
 
     // -------SCREENING ------ //
     @RequestMapping(value = "/screening/start", method = RequestMethod.GET)
-    public String startScreeningPage(HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        // Check if user is logged in
-        if (user == null)
-            return "redirect:/login";
-        else if (this.parentService.getParentByUser(user) == null)
-            return "redirect:/profile/create?message=You must create a profile first!";
+    public String startScreeningPage() {
         return "parents/screening/start";
     }
 
@@ -64,8 +56,6 @@ public class ChildController {
     public String startScreening(@ModelAttribute Child child, BindingResult bindingResult,
                                  HttpSession session) {
         session.setAttribute("child", child);
-        if (session.getAttribute("user") == null)
-            return "redirect:/login";
         if (bindingResult.hasErrors())
             System.out.println(bindingResult.toString());
 
@@ -75,7 +65,9 @@ public class ChildController {
 
     @RequestMapping(value = "/screening/{questionId}", method = RequestMethod.GET)
     public String screeningQuestionariesPage(@PathVariable("questionId") Integer questionId,
-                                             Model model) {
+                                             Model model,HttpSession session) {
+        if (session.getAttribute("child")==null)
+            return "redirect:/child/screening/start";
         Question question = this.questionService.findByQuestionId(questionId);
         model.addAttribute("question", question);
         return "parents/screening/questionaries";
@@ -84,6 +76,7 @@ public class ChildController {
     @RequestMapping(value = "/screening/{questionId}", method = RequestMethod.POST)
     public String screeningQuestionaries(@PathVariable("questionId") Integer questionId,
                                          @RequestParam("userResponse") Boolean userResponse,
+                                         @CurrentUser User currentUser,
                                          HttpSession session) {
         QuestionResponse qResponse = new QuestionResponse();
         qResponse.setQuestionId(questionId);
@@ -100,13 +93,14 @@ public class ChildController {
 
         // If screening test over
         if (questionId >= this.questionService.getAll().size()) {
+            // if someone skipped question by changing url then start over
+            if (responseList.size()<this.questionService.getAll().size())
+                return "redirect:/child/screening/1";
             Child child = (Child) session.getAttribute("child");
             child.setResponseList((List<QuestionResponse>) session.getAttribute("responseList"));
             boolean isDetected = this.childService.isAutismDetected(child);
             child.setAppResult(isDetected);
-            User user = (User) session.getAttribute("user");
-            if (user == null)
-                return "redirect:/login";
+            User user = this.userService.getUserByPhone(currentUser.getPhoneNumber());
             child.setParent(this.parentService.getParentByUser(user));
             this.childService.saveChild(child);
             // clear session data

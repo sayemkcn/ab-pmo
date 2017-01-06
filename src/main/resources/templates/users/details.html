@@ -70,7 +70,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- main content start-->
 <!--start-home-->
 <div th:replace="fragments/header"></div>
-<!--//end-banner-->
 <!-- app-->
 <div class="modal ab fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog about" role="document">
@@ -103,56 +102,91 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- //app-->
 <!-- about-type-grid -->
 <div class="about" id="about">
+
+    <div th:if="${param.message != null}" class="row alert alert-warning">
+        <div class="col-sm-offset-2">
+            <span th:text="${param.message[0]}"></span>
+        </div>
+    </div>
+
     <div class="container" style="padding: 20px;">
-        <div class="col-sm-6 col-sm-offset-3">
-            <h3>Create Question:</h3>
-            <form class="form" th:action="@{/admin/questions/update/}+${question?.getId()}" th:object="${question}"
-                  method="post"
-                  enctype="multipart/form-data">
-                <div class="form-group">
-                    <label class="label label-success" for="questionId">Question Id:</label>
-                    <input class="form-control" type="number" name="questionId" id="questionId"
-                           th:value="${question?.getQuestionId()}"></input>
-                </div>
-                <div class="form-group">
-                    <label class="label label-success" for="title">Question Title</label>
-                    <input class="form-control" type="text" name="title" id="title" placeholder="Title"
-                           th:value="${question?.getTitle()}"></input>
-                </div>
-                <div class="form-group">
-                    <label class="label label-success" for="file">Choose an image</label>
-                    <input class="form-control" type="file" id="file" name="file"></input>
-                </div>
-                <div class="form-group">
-                    <label class="label label-success" for="positiveText">Positive Text</label>
-                    <input class="form-control" type="text" id="positiveText" name="positiveText"
-                           th:value="${question.getPositiveText()}"></input>
-                </div>
-                <div class="form-group">
-                    <label class="label label-success" for="negativeText">Negative Text</label>
-                    <input class="form-control" type="text" name="negativeText" id="negativeText"
-                           th:value="${question.getNegativeText()}"></input>
-                </div>
-                <div class="form-group">
-                    <label class="label label-success" for="autismDetectedForPositiveText">Which button means probability
-                        of Autism?</label>
-                    <div id="autismDetectedForPositiveText" style="padding-top: 10px;">
-                        <label class="radio-inline"><input type="radio" name="autismDetectedForPositiveText" value="true"
-                               th:checked="${question?.isAutismDetectedForPositiveText()}">Positive Button</input></label>
-                        <label class="radio-inline"><input type="radio" name="autismDetectedForPositiveText" value="false"
-                               th:checked="${!question?.isAutismDetectedForPositiveText()}">Negative Button</input></label>
+        <div class="row" id="my-row" th:if="${parent != null}">
+            <div style="padding:15px;" class="col-sm-6 panel panel-default">
+                <h3>User Details</h3><br/><br/>
+
+                <h4>
+                    Name:<br/> <span th:text="${parent?.getUser()?.getName()}">Child Name</span>
+                </h4> <br/>
+
+                <h4>
+                    Phone Number: <br/><span th:text="${parent?.getUser()?.getPhoneNumber()}">23 Months</span>
+                </h4><br/>
+
+                <h4>
+                    Email: <br/><span th:text="${parent?.getUser()?.getEmail()}">MD Hosen Ahmed</span>
+                </h4><br/>
+
+                <h4>
+                    Address: <br/>
+                    <span th:text="${parent?.getAddress()?.getHomeAddress()}"></span>,
+                    <span th:text="${parent?.getAddress()?.getStreetOrVillage()}"></span>,
+                    <span th:text="${parent?.getAddress()?.getUnionOrWard()}"></span>,
+                    <span th:text="${parent?.getAddress()?.getUpazila()}"></span>
+                    <span th:text="${parent?.getAddress()?.getDistrict()}"></span>
+                </h4><br/><br/>
+
+            </div>
+            <div class="col-sm-1"></div>
+            <div style="padding:15px;" class="col-sm-5 panel panel-default">
+                <h3>Online Screening Result</h3><br/>
+                <h4>
+                    Is user enabled?:<br/>
+                    <span th:text="${parent?.getUser()?.isEnabled() ? 'Enabled':'Disabled'}"></span>
+                </h4><br/>
+                <h4>
+                    User Roles:<br/>
+                    <span th:text="${parent?.getUser()?.getRolesCommaSeperated()}"></span>
+                </h4> <br/>
+                <!-- Trigger the modal with a button -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Change Roles</button>
+                <a th:href="@{/users}" class="btn btn-primary">Back to Users</a>
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Set User Roles</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form th:action="@{/users/}+${parent?.getUser()?.getId()}+@{/roles}" method="post">
+                                    <div class="checkbox-inline">
+                                        <input name="roles" type="checkbox" value="ROLE_PARENTS" th:checked="${parent?.getUser()?.getRoles()?.contains('ROLE_PARENTS')}">PARENTS</input>
+                                    </div>
+                                    <div class="checkbox-inline">
+                                        <input name="roles" type="checkbox" value="ROLE_AUTISM_CENTER" th:checked="${parent?.getUser()?.getRoles()?.contains('ROLE_AUTISM_CENTER')}">AUTISM_CENTER</input>
+                                    </div>
+                                    <div class="checkbox-inline">
+                                        <input name="roles" type="checkbox" value="ROLE_ADMIN" th:checked="${parent?.getUser()?.getRoles()?.contains('ROLE_ADMIN')}">ADMIN</input>
+                                    </div>
+                                    <div class="checkbox-inline disabled">
+                                        <input name="roles" type="checkbox" value="ROLE_SUPER_ADMIN" disabled="disabled" th:checked="${parent?.getUser()?.getRoles()?.contains('ROLE_SUPER_ADMIN')}">SUPER_ADMIN</input>
+                                    </div>
+                                    <br/><br/><button class="btn btn-info" type="submit">Set Roles</button>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="checkbox-inline"><input type="checkbox" name="critical" id="critical"
-                           th:checked="${question?.isCritical()}">Critical Question?</input></label>
-                </div>
-                <div>
-                    <button class="btn btn-warning" type="submit">Submit</button>
-                </div>
-            </form>
+            </div>
         </div>
-        <div class="clearfix"></div>
     </div>
 </div>
 <!-- //about-type-grid -->

@@ -1,0 +1,146 @@
+<div id="home" class="header" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+    <!--start-header-->
+    <div class="header-strip">
+        <div class="container">
+            <!-- 				<p class="phonenum"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> HELP LINE:  162362
+
+             &nbsp;&nbsp; Register | &nbsp;Log In</p> -->
+            <div class="social-icons">
+                <!--IF NOT LOGGED IN-->
+                <!--IF NOT LOGGED IN-->
+                <ul sec:authorize="!isAuthenticated()">
+                    <li><a th:href="@{/register}" class="account"><span class="glyphicon glyphicon-user"></span>
+                        রেজিস্ট্রেশন</a></li>
+                    <li><a th:href="@{/login}" class="account"><span class="glyphicon glyphicon-log-in"></span> লগ ইন
+                    </a></li>
+                </ul>
+                <ul sec:authorize="isAuthenticated()">
+                    <li><a class="account"><span sec:authentication="principal.authorities"></span></a></li>
+                    <li><a th:href="@{/profile}" class="account"><span sec:authentication="name"></span></a></li>
+                    <li><a th:href="@{/logout}" class="account"><span class="glyphicon glyphicon-log-in"></span> লগ আউট</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="header-top">
+        <div class="container">
+            <div class="logo"><a href="index.html" th:href="@{/}"><h1>অটিজম<span>বার্তা</span></h1>
+                <p class="top-para">অটিজম নিরুপন ও পর্যবেক্ষণের কমিউনিটি বেইজড স্ক্রিনিং টুল</p></a></div>
+            <div class="main-nav">
+                <span class="menu"></span>
+                <div class="top-menu">
+                    <ul class="nav navbar-nav">
+                        <li><a th:href="@{/}">হোম</a></li>
+                        <li><a th:href="@{/child/screening/start}">অটিজম স্ক্রিনিং</a></li>
+                        <li class="dropdown" sec:authorize="isAuthenticated()">
+                            <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/dashboard}">ড্যাশবোর্ড
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a th:href="@{/dashboard}">ড্যাশবোর্ড</a></li>
+                                <li><a th:href="@{/child}">আমার শিশু</a></li>
+                                <!--<li><a th:href="@{/profile}">প্রোফাইল</a></li>-->
+                                <li th:if="${session.user != null}"><a th:href="@{/profile/create}">প্রোফাইল তৈরী
+                                    করুন</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" sec:authorize="hasAnyRole('ADMIN','SUPER_ADMIN')">
+                            <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/admin/questions}"> অ্যাডমিন
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a th:href="@{/users}">সকল ইউজার</a></li>
+                                <li><a th:href="@{/admin/child?page=0}">শিশুর তালিকা</a></li>
+                                <li><a th:href="@{/admin/questions}"
+                                       sec:authorize="hasRole('SUPER_ADMIN')">প্রশ্নাবলী </a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" sec:authorize="hasRole('AUTISM_CENTER')">
+                            <a class="dropdown-toggle" data-toggle="dropdown" th:href="@{/admin/questions}">অটিজম
+                                সেন্টার
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a th:href="@{/center/home}">সেন্টার হোম</a></li>
+                                <li><a th:href="@{/center/responses}">নতুন রেসপন্স</a></li>
+                                <li><a th:href="@{/center/visited}">ভিজিটিকৃত শিশুর তালিকা</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div> <!--NAVIGATION-->
+            </div>
+            <!-- script-for-menu -->
+            <script>
+                $("span.menu").click(function () {
+                    $(".top-menu").slideToggle("slow", function () {
+                        // Animation complete.
+                    });
+                });
+            </script>
+            <!--End-top-nav-script-->
+            <!--//end-header-->
+            <div class="clearfix"></div>
+        </div>
+        <!--start-banner
+                <div class="banner">
+                           <div class="container">
+                  <div class="banner-slider">
+                  <div class="callbacks_container">
+                      <ul class="rslides" id="slider4">
+                          <li>
+                             <div class="banner-info">
+                                    <h3 class="wow slideInUp"  data-wow-duration="1s" data-wow-delay=".3s">Welcome</h3>
+                                    <p class="wow slideInDown"  data-wow-duration="1s" data-wow-delay=".3s">
+  A Good Strategy</p>
+
+                                   <span class="wow slideInUp"  data-wow-duration="1s" data-wow-delay=".3s">Smart Choice !</span>
+                                </div>
+                          </li>
+                          <li>
+                             <div class="banner-info">
+                                  <h3 class="wow slideInUp"  data-wow-duration="1s" data-wow-delay=".3s">We Love</h3>
+                                   <p class="wow slideInDown"  data-wow-duration="1s" data-wow-delay=".3s">Will Carry You Right</p>
+
+                                   <span class="wow slideInUp"  data-wow-duration="1s" data-wow-delay=".3s">Smart Choice !</span>
+                                </div>
+                          </li>
+                          <li>
+                             <div class="banner-info">
+                                    <h3 class="wow slideInUp"  data-wow-duration="1s" data-wow-delay=".3s">We Plan</h3>
+                                    <p class="wow slideInDown"  data-wow-duration="1s" data-wow-delay=".3s">Through Retirement </p>
+
+                                     <span class="wow slideInUpslideInLeft"  data-wow-duration="1s" data-wow-delay=".3s">Smart Choice !</span>
+                             </div>
+                        </li>
+                      </ul>
+            <script src="js/responsiveslides.min.js"></script>
+               <script>
+                  // You can also use "$(window).load(function() {"
+                  $(function () {
+                    // Slideshow 4
+                    $("#slider4").responsiveSlides({
+                      auto: true,
+                      pager:true,
+                      nav:true,
+                      speed: 500,
+                      namespace: "callbacks",
+                      before: function () {
+                        $('.events').append("<li>before event fired.</li>");
+                      },
+                      after: function () {
+                        $('.events').append("<li>after event fired.</li>");
+                      }
+                    });
+
+                  });
+                </script>
+
+
+
+                </div>
+                  </div>
+             </div>
+          </div> -->
+    </div>
+</div>
+<!--//end-banner-->

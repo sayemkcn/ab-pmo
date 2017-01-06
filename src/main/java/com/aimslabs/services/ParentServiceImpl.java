@@ -24,8 +24,8 @@ public class ParentServiceImpl implements ParentService {
     }
 
     @Override
-    public Parent getParentByUser(User user) {
-        return this.parentRepo.getByUser(user);
+    public Parent getParentByUser(User username) {
+        return this.parentRepo.getByUser(username);
     }
 
     @Override

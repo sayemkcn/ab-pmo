@@ -104,53 +104,63 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- about-type-grid -->
 <div class="about" id="about">
     <div class="container" style="padding: 20px;">
-        <div class="col-sm-6 col-sm-offset-3">
-            <h3>Create Question:</h3>
-            <form class="form" th:action="@{/admin/questions/update/}+${question?.getId()}" th:object="${question}"
-                  method="post"
-                  enctype="multipart/form-data">
-                <div class="form-group">
-                    <label class="label label-success" for="questionId">Question Id:</label>
-                    <input class="form-control" type="number" name="questionId" id="questionId"
-                           th:value="${question?.getQuestionId()}"></input>
-                </div>
-                <div class="form-group">
-                    <label class="label label-success" for="title">Question Title</label>
-                    <input class="form-control" type="text" name="title" id="title" placeholder="Title"
-                           th:value="${question?.getTitle()}"></input>
-                </div>
-                <div class="form-group">
-                    <label class="label label-success" for="file">Choose an image</label>
-                    <input class="form-control" type="file" id="file" name="file"></input>
-                </div>
-                <div class="form-group">
-                    <label class="label label-success" for="positiveText">Positive Text</label>
-                    <input class="form-control" type="text" id="positiveText" name="positiveText"
-                           th:value="${question.getPositiveText()}"></input>
-                </div>
-                <div class="form-group">
-                    <label class="label label-success" for="negativeText">Negative Text</label>
-                    <input class="form-control" type="text" name="negativeText" id="negativeText"
-                           th:value="${question.getNegativeText()}"></input>
-                </div>
-                <div class="form-group">
-                    <label class="label label-success" for="autismDetectedForPositiveText">Which button means probability
-                        of Autism?</label>
-                    <div id="autismDetectedForPositiveText" style="padding-top: 10px;">
-                        <label class="radio-inline"><input type="radio" name="autismDetectedForPositiveText" value="true"
-                               th:checked="${question?.isAutismDetectedForPositiveText()}">Positive Button</input></label>
-                        <label class="radio-inline"><input type="radio" name="autismDetectedForPositiveText" value="false"
-                               th:checked="${!question?.isAutismDetectedForPositiveText()}">Negative Button</input></label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="checkbox-inline"><input type="checkbox" name="critical" id="critical"
-                           th:checked="${question?.isCritical()}">Critical Question?</input></label>
-                </div>
-                <div>
-                    <button class="btn btn-warning" type="submit">Submit</button>
-                </div>
-            </form>
+        <div th:if="${param.message != null}" class="row alert alert-warning" style="padding-left: 50px;">
+            <div class="col-sm-offset-2">
+                <span th:text="${param.message[0]}"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>User List</h3>
+                <table class="table table-hover table-striped table-bordered">
+                    <thead>
+                    <tr class="info">
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Enabled</th>
+                        <th>User Roles</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${userList != null}" th:each="user : ${userList}"
+                        th:classappend="${user?.isEnabled()} ? active : danger">
+                        <td>
+                            <span th:text="${user?.getId()}"></span>
+                        </td>
+                        <td>
+                            <a th:href="@{/users/} + ${user?.getId()}">
+                                <span th:text="${user?.getName()}"></span>
+                            </a>
+                        </td>
+                        <td>
+                            <span th:text="${user?.getEmail()}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${user?.getPhoneNumber()}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${user?.isEnabled() ? 'Enabled':'Disabled'}"></span>
+                        </td>
+                        <td>
+                            <a th:href="@{/users/} + ${user?.getId()}">
+                                <span th:text="${user?.getRolesCommaSeperated()}"></span>
+                            </a>
+                        </td>
+                        <td>
+                            <form th:action="@{/users/}+${user?.getId()}+@{/action(enabled=${!user?.isEnabled()})}"
+                                  method="post">
+                                <button class="btn btn-primary"
+                                        th:text="${user?.isEnabled()}? 'Disable' : 'Enable'"></button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="clearfix"></div>
     </div>

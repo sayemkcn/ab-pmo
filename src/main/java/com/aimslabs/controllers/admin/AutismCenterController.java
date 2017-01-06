@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * Author: Rezaul - Date: 29-Dec-16.
  */
 @Controller
-@RequestMapping("/admin/center")
+@RequestMapping("/center")
 public class AutismCenterController {
 
     @Autowired
@@ -48,7 +48,7 @@ public class AutismCenterController {
             child.setDoctorNote(doctorNote);
             this.childService.saveChild(child);
         }
-        return "redirect:/admin/center/child/" + id;
+        return "redirect:/center/child/" + id;
     }
 
     @RequestMapping(value = "/visited",method = RequestMethod.GET)

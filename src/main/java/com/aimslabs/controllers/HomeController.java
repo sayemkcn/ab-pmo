@@ -54,36 +54,40 @@ public class HomeController {
 
     // ---- LOGIN ---- //
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginPage(HttpSession session) {
-        if (session.getAttribute("user") != null)
-            return "redirect:/";
+    public String loginPage() {
         return "login";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@RequestParam("phoneNumber") String phoneNumber,
-                        @RequestParam("password") String password, Model model,
-                        HttpSession session) {
-        User user = this.userService.getUserByPhone(phoneNumber);
-        if (user == null) {
-            model.addAttribute("phoneNumber", phoneNumber);
-            return "login";
-        }
-        if (!user.getPassword().equals(password)) {
-            model.addAttribute("message", "Password doen\'t match!");
-            return "login";
-        }
-        session.setAttribute("user", user);
-        // check if user already started screening, if yes the start screening again
-        if (session.getAttribute("child") != null)
-            return "redirect:/child/screening/1";
-        return "redirect:/dashboard";
+    @RequestMapping(value = "/digits-login", method = RequestMethod.GET)
+    public String digitsLogin() {
+        return "digits-login";
     }
 
-    // -- LOGOUT -- /
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "redirect:/login";
-    }
+
+//    @RequestMapping(value = "/login", method = RequestMethod.POST)
+//    public String login(@RequestParam("phoneNumber") String phoneNumber,
+//                        @RequestParam("password") String password, Model model,
+//                        HttpSession session) {
+//        User user = this.userService.getUserByPhone(phoneNumber);
+//        if (user == null) {
+//            model.addAttribute("phoneNumber", phoneNumber);
+//            return "login";
+//        }
+//        if (!user.getPassword().equals(password)) {
+//            model.addAttribute("message", "Password doen\'t match!");
+//            return "login";
+//        }
+//        session.setAttribute("user", user);
+//        // check if user already started screening, if yes the start screening again
+//        if (session.getAttribute("child") != null)
+//            return "redirect:/child/screening/1";
+//        return "redirect:/dashboard";
+//    }
+
+//    // -- LOGOUT -- /
+//    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+//    public String logout(HttpSession session) {
+//        session.invalidate();
+//        return "redirect:/login";
+//    }
 }
