@@ -61,9 +61,9 @@ public class HomeController {
         return "login";
     }
 
-    @RequestMapping(value = "/digits-login", method = RequestMethod.GET)
-    public String digitsLogin() {
-        return "digits-login";
+    @RequestMapping(value = "/accountkit", method = RequestMethod.GET)
+    public String accountkit() {
+        return "accountkit";
     }
 
 

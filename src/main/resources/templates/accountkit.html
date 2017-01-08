@@ -56,33 +56,82 @@
             });
         });
     </script>
-    <script id="digits-sdk" src="https://cdn.digits.com/1/sdk.js" async="async"></script>
+
+    <!--//end-smoth-scrolling-->
+
     <script>
-        /* Initialize Digits for Web using your application's consumer key that Fabric generated */
-        document.getElementById('digits-sdk').onload = function() {
-            Digits.init({ consumerKey: 'SkqUWNrghQ2FI18lOj8PwxZaP' });
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '1888177171414926',
+                xfbml      : true,
+                version    : 'v2.8'
+            });
         };
 
-        /* Launch the Login to Digits flow. */
-        function onLoginButtonClick(event){
-            Digits.logIn()
-                    .done(onLogin) /*handle the response*/
-                    .fail(onLoginFailure);
-        }
-        /* Validate and log use in. */
-        function onLogin(loginResponse){
-            // Send headers to your server and validate user by calling Digits’ API
-            var oAuthHeaders = loginResponse.oauth_echo_headers;
-            var verifyData = {
-                authHeader: oAuthHeaders['X-Verify-Credentials-Authorization'],
-                apiUrl: oAuthHeaders['X-Auth-Service-Provider']
-            };
-
-            $.post('/verify', verifyData)
-                    .done(function(){ window.reload(); });
-        }
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
     </script>
-    <!--//end-smoth-scrolling-->
+    <script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
+
+    <script>
+        // initialize Account Kit with CSRF protection
+        AccountKit_OnInteractive = function(){
+            AccountKit.init(
+                    {
+                        appId:'1888177171414926',
+                        state:"{{csrf}}",
+                        version:"v1.1",
+                        debug:true
+                     }
+            );
+        };
+
+        // login callback
+        function loginCallback(response) {
+            console.log(response);
+            console.log("NO IDEA");
+
+            if (response.status === "PARTIALLY_AUTHENTICATED") {
+                console.log("Authenticated");
+                window.location = "/register";
+//                document.getElementById("code").value = response.code;
+//                document.getElementById("csrf_nonce").value = response.state;
+//                document.getElementById("my_form").submit();
+            }
+            else if (response.status === "NOT_AUTHENTICATED") {
+                console.log("NOT AUTHENTICATED");
+                // handle authentication failure
+            }
+            else if (response.status === "BAD_PARAMS") {
+                console.log("BAD PARAMS");
+                // handle bad parameters
+            }
+        }
+
+        // phone form submission handler
+        function phone_btn_onclick() {
+            var country_code = document.getElementById("country_code").value;
+            var ph_num = document.getElementById("phone_num").value;
+            AccountKit.login('PHONE',
+                    {countryCode: country_code, phoneNumber: ph_num}, // will use default values if this is not specified
+                    loginCallback);
+        }
+
+
+        // email form submission handler
+        function email_btn_onclick() {
+            var email_address = document.getElementById("email").value;
+
+            AccountKit.login('EMAIL', {emailAddress: email_address}, loginCallback);
+        }
+
+    </script>
+
 </head>
 
 <body>
@@ -96,6 +145,7 @@
 <!-- about-type-grid -->
 <div class="about" id="about">
     <div class="container" style="padding: 50px;">
+
         <div class="row" style="color: red; font-size: 18px;"><span th:if="${param.error != null}">Invalid phone number or password!</span></div>
         <div class="row"><span th:if="${param.message != null}" th:text="${param.message[0]}"></span></div>
         <div class="row">
@@ -107,27 +157,27 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6 col-sm-offset-3">
-                <h3>লগইন</h3>
-                <form class="form" th:action="@{/login}" method="post"
-                      enctype="multipart/form-data">
+            <!--<form class="form">-->
+                <div class="form-group">
+                    <label class="label label-primary" for="country_code">কান্ট্রি কোডঃ </label>
+                    <input class="form-control" type="text" id="country_code"></input>
+                </div>
 
-                    <div class="form-group">
-                        <label class="label label-primary" for="phoneNumber">মোবাইল নাম্বার:</label>
-                        <input class="form-control" type="text" name="username" th:value="${phoneNumber}" id="phoneNumber"></input>
-                    </div>
+                <div class="form-group">
+                    <label class="label label-primary" for="phone_num">ফোন নম্বরঃ</label>
+                    <input class="form-control" type="text" id="phone_num"></input>
+                </div>
+                <button class="btn btn-primary" onclick="phone_btn_onclick();">লগ ইন</button>
+            <!--</form>-->
 
-                    <div class="form-group">
-                        <label class="label label-primary" for="password">পাসওয়ার্ড:</label>
-                        <input class="form-control" type="password" id="password" name="password"></input>
-                    </div>
-                    <button onclick="onLoginButtonClick(event)" class="btn btn-primary" type="submit">লগ ইন</button>
-                    <div>
-                        <span>এখনও রেজিস্ট্রেশন করেন নি?</span>
-                        <a th:href="@{/register}">রেজিস্ট্রেশন করুন</a>
-                    </div>
-                </form>
-            </div>
+            <!--Enter country code (e.g. +1):-->
+            <!--<input type="text" id="country_code" />-->
+            <!--Enter phone number without spaces (e.g. 444555666):-->
+            <!--<input type="text" id="phone_num"/>-->
+            <!--<button onclick="phone_btn_onclick();">Login via SMS</button>-->
+            <!--Enter email address-->
+            <!--<input type="text" id="email"/>-->
+            <!--<button onclick="email_btn_onclick();">Login via Email</button>-->
         </div>
 
         <div class="clearfix"></div>
