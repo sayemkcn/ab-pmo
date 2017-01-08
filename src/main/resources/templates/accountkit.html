@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -60,18 +59,21 @@
     <!--//end-smoth-scrolling-->
 
     <script>
-        window.fbAsyncInit = function() {
+        window.fbAsyncInit = function () {
             FB.init({
-                appId      : '1888177171414926',
-                xfbml      : true,
-                version    : 'v2.8'
+                appId: '1888177171414926',
+                xfbml: true,
+                version: 'v2.8'
             });
         };
 
-        (function(d, s, id){
+        (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
             js.src = "//connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
@@ -80,14 +82,14 @@
 
     <script>
         // initialize Account Kit with CSRF protection
-        AccountKit_OnInteractive = function(){
+        AccountKit_OnInteractive = function () {
             AccountKit.init(
                     {
-                        appId:'1888177171414926',
-                        state:"{{csrf}}",
-                        version:"v1.1",
-                        debug:true
-                     }
+                        appId: '1888177171414926',
+                        state: "{{csrf}}",
+                        version: "v1.1",
+                        debug: true
+                    }
             );
         };
 
@@ -98,7 +100,8 @@
 
             if (response.status === "PARTIALLY_AUTHENTICATED") {
                 console.log("Authenticated");
-                window.location = "/register";
+                var ph_num = document.getElementById("phone_num").value;
+                window.location = "/sendNum?phoneNumber=" + ph_num;
 //                document.getElementById("code").value = response.code;
 //                document.getElementById("csrf_nonce").value = response.state;
 //                document.getElementById("my_form").submit();
@@ -146,7 +149,8 @@
 <div class="about" id="about">
     <div class="container" style="padding: 50px;">
 
-        <div class="row" style="color: red; font-size: 18px;"><span th:if="${param.error != null}">Invalid phone number or password!</span></div>
+        <div class="row" style="color: red; font-size: 18px;"><span th:if="${param.error != null}">Invalid phone number or password!</span>
+        </div>
         <div class="row"><span th:if="${param.message != null}" th:text="${param.message[0]}"></span></div>
         <div class="row">
             <div th:if="${phoneNumber != null}" class="col-sm-8 col-sm-offset-2 alert alert-warning">
@@ -158,16 +162,16 @@
         </div>
         <div class="row">
             <!--<form class="form">-->
-                <div class="form-group">
-                    <label class="label label-primary" for="country_code">কান্ট্রি কোডঃ </label>
-                    <input class="form-control" type="text" id="country_code"></input>
-                </div>
+            <div class="form-group">
+                <label class="label label-primary" for="country_code">কান্ট্রি কোডঃ </label>
+                <input class="form-control" type="text" id="country_code" value="+880"></input>
+            </div>
 
-                <div class="form-group">
-                    <label class="label label-primary" for="phone_num">ফোন নম্বরঃ</label>
-                    <input class="form-control" type="text" id="phone_num"></input>
-                </div>
-                <button class="btn btn-primary" onclick="phone_btn_onclick();">লগ ইন</button>
+            <div class="form-group">
+                <label class="label label-primary" for="phone_num">ফোন নম্বরঃ</label>
+                <input class="form-control" type="text" id="phone_num"></input>
+            </div>
+            <button class="btn btn-primary" onclick="phone_btn_onclick();">লগ ইন</button>
             <!--</form>-->
 
             <!--Enter country code (e.g. +1):-->

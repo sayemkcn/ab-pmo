@@ -29,7 +29,7 @@ public class SecurityConfigAdapter extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/accountkit","/api/**","/","/login","/digits-login","/logout","/register","/profile/create","/fonts/**").permitAll()
+                    .antMatchers("/accountkit","/sendNum","/api/**","/","/login","/digits-login","/logout","/register","/profile/create","/fonts/**").permitAll()
 //                    .antMatchers("/child/**").hasAnyRole("PARENTS","AUTISM_CENTER","SUPER_ADMIN")
                     .antMatchers("/center/**").hasAnyRole("AUTISM_CENTER")
 //                    .antMatchers("/users/*/roles").hasRole("SUPER_ADMIN")

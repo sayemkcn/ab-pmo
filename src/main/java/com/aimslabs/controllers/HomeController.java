@@ -29,15 +29,19 @@ public class HomeController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/dashboard",method = RequestMethod.GET)
-    public String dashboard()
-    {
+    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+    public String dashboard() {
         return "parents/dashboard";
     }
 
     // -- REGISTER -- //
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String registerPage() {
+    public String registerPage(Model model, HttpSession session) {
+        String phoneNumber = (String) session.getAttribute("validatedNumber");
+        session.removeAttribute("validatedNumber");
+        if (phoneNumber == null || phoneNumber.isEmpty())
+            return "redirect:/accountkit";
+        model.addAttribute("phoneNumber", phoneNumber);
         return "register";
     }
 
@@ -46,12 +50,13 @@ public class HomeController {
         if (bindingResult.hasErrors())
             System.out.println(bindingResult.toString());
         Set<String> roles = new HashSet<>();
+        if (!user.getPhoneNumber().startsWith("0")) user.setPhoneNumber("0" + user.getPhoneNumber());
         if (user.getPhoneNumber().equals("01710226163") || user.getPhoneNumber().equals("01515667948"))
             roles.add("ROLE_SUPER_ADMIN");
         else
             roles.add("ROLE_PARENTS");
         user.setRoles(roles);
-        session.setAttribute("newUser",user);
+        session.setAttribute("newUser", user);
         return "redirect:/profile/create";
     }
 
@@ -66,6 +71,11 @@ public class HomeController {
         return "accountkit";
     }
 
+    @RequestMapping(value = "/sendNum", method = RequestMethod.GET)
+    public String submitValidatedNumber(@RequestParam("phoneNumber") String phoneNumber, HttpSession session) {
+        session.setAttribute("validatedNumber", phoneNumber);
+        return "redirect:/register";
+    }
 
 //    @RequestMapping(value = "/login", method = RequestMethod.POST)
 //    public String login(@RequestParam("phoneNumber") String phoneNumber,
